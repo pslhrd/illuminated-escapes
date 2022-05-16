@@ -9,6 +9,15 @@
   const { client } = usePrismic()
   const { data: menu } = await useAsyncData('menu', () => client.getSingle('menu'))
   const menuData = menu.value.data
+
+  const nuxtApp = useNuxtApp()
+    
+  nuxtApp.hook('page:start', () => {
+    console.log('page load start')
+  })
+  nuxtApp.hook('page:finish', () => {
+    console.log('page load finish')
+  })
   // console.log(menuData)
 </script>
 
