@@ -1,21 +1,34 @@
-# Nuxt 3 + Vite + SASS Starter
+# Nuxt 3 + Prismic test
 
-We recommend to look at the [documentation](https://v3.nuxtjs.org).
+Look at the [nuxt 3 documentation](https://v3.nuxtjs.org).
+Look at the [prismic 3 module](https://v3.prismic.nuxtjs.org/).
 
 ## Setup
 
-Make sure to install the dependencies
+Use Node version 16+
 
 ```bash
-npm install
+nvm use 16
 ```
 
-## Development
+Make sure to install the dependencies:
+
+```bash
+yarn install
+```
+
+## Development Server
 
 Start the development server on http://localhost:3000
 
 ```bash
-npm run dev
+yarn dev
+```
+
+Start the slice machine locally on http://localhost:9999
+
+```bash
+yarn slicemachine
 ```
 
 ## Production
@@ -23,7 +36,7 @@ npm run dev
 Build the application for production:
 
 ```bash
-npm build
+yarn build
 ```
 
-Checkout the [deployment documentation](https://v3.nuxtjs.org/docs/deployment).
+Checkout the [deployment documentation](https://v3.nuxtjs.org/docs/deployment) for more information.

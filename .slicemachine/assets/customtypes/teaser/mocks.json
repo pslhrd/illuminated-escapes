@@ -1,0 +1,24 @@
+{
+  "id": "b87adb3a-6500-4a26-80a3-270326400c86",
+  "uid": "dolorem-autem-velit",
+  "type": "teaser",
+  "data": {
+    "title": "orchestrate cross-platform experiences",
+    "content": [
+      {
+        "type": "paragraph",
+        "text": "In nulla reprehenderit ullamco aliquip occaecat ut nisi dolore nisi commodo eu sint esse reprehenderit sint. Qui veniam consectetur anim non non sit laborum qui aute ut dolore labore amet quis. Elit et esse nostrud.",
+        "spans": []
+      }
+    ],
+    "heroimage": {
+      "dimensions": {
+        "width": 900,
+        "height": 500
+      },
+      "alt": "Placeholder image",
+      "copyright": null,
+      "url": "https://images.unsplash.com/photo-1587614295999-6c1c13675117?w=900&h=500&fit=crop"
+    }
+  }
+}

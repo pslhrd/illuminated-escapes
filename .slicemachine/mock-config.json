@@ -1,0 +1,33 @@
+{
+  "_cts": {
+    "teaser": {},
+    "post": {},
+    "home": {
+      "title": {
+        "config": {
+          "patternType": "PARAGRAPH",
+          "blocks": 1
+        }
+      }
+    },
+    "about": {},
+    "menu": {
+      "links": {}
+    },
+    "locations": {},
+    "location": {}
+  },
+  "slices": {
+    "ImagePush": {
+      "default": {
+        "primary": {}
+      }
+    },
+    "LocationHero": {},
+    "LocationDescription": {
+      "default": {
+        "primary": {}
+      }
+    }
+  }
+}

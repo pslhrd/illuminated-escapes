@@ -1,0 +1,315 @@
+{
+  "slices": {
+    "components": {
+      "image_push": {
+        "library": "slices",
+        "id": "image_push",
+        "name": "ImagePush",
+        "description": "ImagePush",
+        "model": {
+          "id": "image_push",
+          "type": "SharedSlice",
+          "name": "ImagePush",
+          "description": "ImagePush",
+          "variations": [
+            {
+              "id": "default",
+              "name": "Default",
+              "docURL": "...",
+              "version": "sktwi1xtmkfgx8626",
+              "description": "ImagePush",
+              "primary": {
+                "title": {
+                  "type": "StructuredText",
+                  "config": {
+                    "single": "heading1",
+                    "label": "Title",
+                    "placeholder": "This is where it all begins..."
+                  }
+                },
+                "image": {
+                  "type": "Image",
+                  "config": {
+                    "label": "Image",
+                    "constraint": {},
+                    "thumbnails": []
+                  }
+                }
+              },
+              "items": {},
+              "imageUrl": "https://images.prismic.io/slice-machine/621a5ec4-0387-4bc5-9860-2dd46cbc07cd_default_ss.png?auto=compress,format"
+            }
+          ]
+        },
+        "mocks": {
+          "default": {
+            "variation": "default",
+            "name": "Default",
+            "slice_type": "image_push",
+            "items": [],
+            "primary": {
+              "title": [
+                {
+                  "type": "heading1",
+                  "text": "Revolutionize frictionless networks",
+                  "spans": []
+                }
+              ],
+              "image": {
+                "dimensions": {
+                  "width": 900,
+                  "height": 500
+                },
+                "alt": "Placeholder image",
+                "copyright": null,
+                "url": "https://images.unsplash.com/photo-1587905069134-008460d7a636?w=900&h=500&fit=crop"
+              }
+            }
+          }
+        },
+        "meta": {
+          "fileName": "index",
+          "extension": "vue"
+        },
+        "screenshotPaths": {}
+      },
+      "location_description": {
+        "library": "slices",
+        "id": "location_description",
+        "name": "LocationDescription",
+        "description": "LocationDescription",
+        "model": {
+          "id": "location_description",
+          "type": "SharedSlice",
+          "name": "LocationDescription",
+          "description": "LocationDescription",
+          "variations": [
+            {
+              "id": "default",
+              "name": "Default",
+              "docURL": "...",
+              "version": "sktwi1xtmkfgx8626",
+              "description": "LocationDescription",
+              "primary": {
+                "subtitle": {
+                  "type": "StructuredText",
+                  "config": {
+                    "label": "Subtitle",
+                    "placeholder": "",
+                    "allowTargetBlank": true,
+                    "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                  }
+                },
+                "description": {
+                  "type": "StructuredText",
+                  "config": {
+                    "label": "Description",
+                    "placeholder": "",
+                    "allowTargetBlank": true,
+                    "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                  }
+                },
+                "description1": {
+                  "type": "Image",
+                  "config": {
+                    "label": "Description1",
+                    "constraint": {},
+                    "thumbnails": []
+                  }
+                },
+                "description2": {
+                  "type": "Image",
+                  "config": {
+                    "label": "Description2",
+                    "constraint": {},
+                    "thumbnails": []
+                  }
+                },
+                "labor": {
+                  "type": "StructuredText",
+                  "config": {
+                    "label": "Labor",
+                    "placeholder": "",
+                    "allowTargetBlank": true,
+                    "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                  }
+                }
+              },
+              "items": {},
+              "imageUrl": "https://images.prismic.io/slice-machine/621a5ec4-0387-4bc5-9860-2dd46cbc07cd_default_ss.png?auto=compress,format"
+            }
+          ]
+        },
+        "mocks": {
+          "default": {
+            "variation": "default",
+            "name": "Default",
+            "slice_type": "location_description",
+            "items": [],
+            "primary": {
+              "subtitle": [
+                {
+                  "type": "paragraph",
+                  "text": "Do id excepteur deserunt proident eu ipsum exercitation commodo. In consectetur ea sint deserunt ad et non nisi excepteur sit exercitation in sunt.",
+                  "spans": []
+                }
+              ],
+              "description": [
+                {
+                  "type": "paragraph",
+                  "text": "Anim aliqua velit tempor consequat labore pariatur duis voluptate et. Ullamco pariatur Lorem amet nostrud laboris. Amet eiusmod ad anim nostrud non ex.",
+                  "spans": []
+                }
+              ],
+              "description1": {
+                "dimensions": {
+                  "width": 900,
+                  "height": 500
+                },
+                "alt": "Placeholder image",
+                "copyright": null,
+                "url": "https://images.unsplash.com/photo-1576662712957-9c79ae1280f8?w=900&h=500&fit=crop"
+              },
+              "description2": {
+                "dimensions": {
+                  "width": 900,
+                  "height": 500
+                },
+                "alt": "Placeholder image",
+                "copyright": null,
+                "url": "https://images.unsplash.com/photo-1606248897732-2c5ffe759c04?w=900&h=500&fit=crop"
+              },
+              "labor": [
+                {
+                  "type": "paragraph",
+                  "text": "Irure enim mollit non sint laboris irure quis et aute amet ipsum laboris minim ea exercitation.",
+                  "spans": []
+                }
+              ]
+            }
+          }
+        },
+        "meta": {
+          "fileName": "index",
+          "extension": "vue"
+        },
+        "screenshotPaths": {}
+      },
+      "location_hero": {
+        "library": "slices",
+        "id": "location_hero",
+        "name": "LocationHero",
+        "description": "LocationHero",
+        "model": {
+          "id": "location_hero",
+          "type": "SharedSlice",
+          "name": "LocationHero",
+          "description": "LocationHero",
+          "variations": [
+            {
+              "id": "default",
+              "name": "Default",
+              "docURL": "...",
+              "version": "sktwi1xtmkfgx8626",
+              "description": "LocationHero",
+              "primary": {
+                "title": {
+                  "type": "StructuredText",
+                  "config": {
+                    "single": "heading1",
+                    "label": "Title",
+                    "placeholder": "This is where it all begins..."
+                  }
+                },
+                "description": {
+                  "type": "StructuredText",
+                  "config": {
+                    "single": "paragraph",
+                    "label": "Description",
+                    "placeholder": "A nice description of your product"
+                  }
+                },
+                "hero": {
+                  "type": "Image",
+                  "config": {
+                    "label": "Hero",
+                    "constraint": {},
+                    "thumbnails": []
+                  }
+                },
+                "link": {
+                  "type": "Link",
+                  "config": {
+                    "label": "Link",
+                    "placeholder": "",
+                    "select": null
+                  }
+                },
+                "button": {
+                  "type": "StructuredText",
+                  "config": {
+                    "label": "Button",
+                    "placeholder": "",
+                    "allowTargetBlank": true,
+                    "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                  }
+                }
+              },
+              "items": {},
+              "imageUrl": "https://images.prismic.io/slice-machine/621a5ec4-0387-4bc5-9860-2dd46cbc07cd_default_ss.png?auto=compress,format"
+            }
+          ]
+        },
+        "mocks": {
+          "default": {
+            "variation": "default",
+            "name": "Default",
+            "slice_type": "location_hero",
+            "items": [],
+            "primary": {
+              "title": [
+                {
+                  "type": "heading1",
+                  "text": "Benchmark frictionless partnerships",
+                  "spans": []
+                }
+              ],
+              "description": [
+                {
+                  "type": "paragraph",
+                  "text": "Anim magna sunt duis culpa.",
+                  "spans": []
+                }
+              ],
+              "hero": {
+                "dimensions": {
+                  "width": 900,
+                  "height": 500
+                },
+                "alt": "Placeholder image",
+                "copyright": null,
+                "url": "https://images.unsplash.com/photo-1545239351-1141bd82e8a6?w=900&h=500&fit=crop"
+              },
+              "link": {
+                "link_type": "Web",
+                "url": "https://prismic.io"
+              },
+              "button": [
+                {
+                  "type": "paragraph",
+                  "text": "Velit minim voluptate cillum. Aute nulla magna veniam esse eu nulla.",
+                  "spans": []
+                }
+              ]
+            }
+          }
+        },
+        "meta": {
+          "fileName": "index",
+          "extension": "vue"
+        },
+        "screenshotPaths": {}
+      }
+    }
+  }
+}
