@@ -1,4 +1,5 @@
 import { defineNuxtConfig } from 'nuxt'
+import { linkResolver } from '@/prismic/linkResolver'
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
@@ -18,18 +19,18 @@ export default defineNuxtConfig({
   ],
   prismic: {
     endpoint: 'illuminated-escapes',
-    // linkResolver: "~/prismic/linkResolver",
-    clientConfig: {
-      routes: [
-        {
-          type: "location",
-          path: "/:uid"
-        },
-        {
-          type: "home",
-          path: "/"
-        }
-      ]
-    }
+    // linkResolver: "@/prismic/linkResolver",
+    // clientConfig: {
+    //   routes: [
+    //     {
+    //       type: "location",
+    //       path: "/locations/:uid"
+    //     },
+    //     {
+    //       type: "home",
+    //       path: "/"
+    //     }
+    //   ]
+    // }
   }
 })

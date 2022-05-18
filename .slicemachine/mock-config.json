@@ -14,7 +14,9 @@
     "menu": {
       "links": {}
     },
-    "locations": {},
+    "locations": {
+      "locations": {}
+    },
     "location": {}
   },
   "slices": {

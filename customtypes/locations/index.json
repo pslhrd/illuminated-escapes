@@ -47,7 +47,8 @@
               "type": "Link",
               "config": {
                 "label": "Link",
-                "select": "document"
+                "placeholder": "",
+                "select": null
               }
             },
             "button": {

@@ -62,7 +62,6 @@ onMounted(() => {
     font-family: 'Sharp Grotesk', Helvetica, sans-serif;
 
     button {
-      display: block;
       display: flex;
       flex-direction: row;
       justify-content: center;
@@ -93,7 +92,7 @@ onMounted(() => {
         transform: translateX(0%);
       }
       .menu-overlay {
-        opacity: 0.5;
+        opacity: 0.7;
       }
     }
 
@@ -129,6 +128,13 @@ onMounted(() => {
       color: black;
       font-family: 'Sharp Grotesk';
       font-size: 90px;
+
+      a {
+        transition: opacity 0.4s cubic-bezier(.35,.17,.25,1);
+      }
+      a:hover {
+        opacity: 0.4;
+      }
     }
 
     .closeMenu {

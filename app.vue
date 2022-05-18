@@ -6,6 +6,7 @@
 </template>
 
 <script setup>
+  import { store } from '@/store/store'
   const { client } = usePrismic()
   const { data: menu } = await useAsyncData('menu', () => client.getSingle('menu'))
   const menuData = menu.value.data
@@ -13,10 +14,17 @@
   const nuxtApp = useNuxtApp()
     
   nuxtApp.hook('page:start', () => {
-    console.log('page load start')
+    console.log('done')
+    if (store.menuOpen === true) {
+      console.log('launched')
+      store.menuOpen = false
+    }
   })
   nuxtApp.hook('page:finish', () => {
-    console.log('page load finish')
+    if (store.menuOpen === true) {
+      console.log('launched')
+      store.menuOpen = false
+    }
   })
   // console.log(menuData)
 </script>

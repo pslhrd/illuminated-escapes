@@ -1,7 +1,18 @@
 <template>
-  <section class="section">
-    <PrismicRichText :field="slice.primary.title" class="title" />
-    <PrismicRichText :field="slice.primary.description" />
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-content-title">
+        <PrismicRichText :field="slice.primary.title" />
+      </div>
+      <div class="hero-content-cta">
+        <NuxtLink>
+          <button><PrismicRichText :field="slice.primary.button" /></button>
+        </NuxtLink>
+      </div>
+    </div>
+    <div class="hero-background">
+      <PrismicImage :field="slice.primary.hero" />
+    </div>
   </section>
 </template>
 

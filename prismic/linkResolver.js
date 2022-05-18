@@ -1,4 +1,4 @@
-export default (doc) => {
+export default function linkResolver (doc) {
   if (doc.type === 'location') {
     return `/${doc.uid}`
   }

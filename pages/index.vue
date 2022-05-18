@@ -1,52 +1,53 @@
 <template>
-  <main class="main">
-    <section ref="hero" class="hero">
-      <div class="hero-content">
-        <div class="hero-content-title" v-splitWords>{{ $prismic.asText(page.title) }}</div>
-        <button>{{ $prismic.asText(page.button) }}</button>
-      </div>
-      <div class="video-wrapper">
-        <video src="@/public/videos/homepage.mp4" autoplay muted loop></video>
-      </div>
-    </section>
-    <section ref="middle" class="middle">
-      <div class="middle-image1">
-        <prismic-image :field="page.image1" />
-      </div>
-      <div class="middle-image2">
-        <prismic-image :field="page.image2" />
-      </div>
-      <div class="middle-content">
-        <div class="middle-content-title" v-splitWords>{{ $prismic.asText(page.section1) }}</div>
-        <div class="middle-content-labor">{{ $prismic.asText(page.labor1) }}</div>
-        <button>{{ $prismic.asText(page.button1) }}</button>
-      </div>
-      <div class="middle-background">
-        <div class="wrapper">
-          <img src="@/public/images/particles.png">
+  <main class="main" v-smoothScroll>
+    <div class="virtualScroll">
+      <section ref="hero" class="hero">
+        <div class="hero-content">
+          <div class="hero-content-title" v-splitWords>{{ $prismic.asText(page.title) }}</div>
+          <button>{{ $prismic.asText(page.button) }}</button>
         </div>
-        <div class="wrapper">
-          <img src="@/public/images/particles.png">
+        <div class="video-wrapper">
+          <video ref="videoDom" src="@/public/videos/homepage.mp4" autoplay muted loop></video>
         </div>
-      </div>
-    </section>
-    <section ref="bottom" class="bottom">
-      <div class="bottom-content">
-        <div class="bottom-content-subtitle">{{ $prismic.asText(page.subtitle2) }}</div>
-        <div v-splitWords class="bottom-content-title">{{ $prismic.asText(page.title2) }}</div>
-      </div>
-      <!-- <div class="bottom-background"></div> -->
-    </section>
+      </section>
+      <section ref="middle" class="middle">
+        <div class="middle-image1">
+          <prismic-image :field="page.image1" />
+        </div>
+        <div class="middle-image2">
+          <prismic-image :field="page.image2" />
+        </div>
+        <div class="middle-content">
+          <div class="middle-content-title" v-splitWords>{{ $prismic.asText(page.section1) }}</div>
+          <div class="middle-content-labor">{{ $prismic.asText(page.labor1) }}</div>
+          <button>{{ $prismic.asText(page.button1) }}</button>
+        </div>
+        <div class="middle-background">
+          <div class="wrapper">
+            <img src="@/public/images/particles.png">
+          </div>
+          <div class="wrapper">
+            <img src="@/public/images/particles.png">
+          </div>
+        </div>
+      </section>
+      <section ref="bottom" class="bottom">
+        <div class="bottom-content">
+          <div class="bottom-content-subtitle">{{ $prismic.asText(page.subtitle2) }}</div>
+          <div v-splitWords class="bottom-content-title">{{ $prismic.asText(page.title2) }}</div>
+        </div>
+        <!-- <div class="bottom-background"></div> -->
+      </section>
+    </div>
     <!-- <slice-zone v-if="page.slices && page.slices.length" :slices="page.slices" :components="components"/> -->
   </main>
 </template>
 
 <script setup>
 import { ref, onMounted, nextTick } from 'vue'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-gsap.registerPlugin(ScrollTrigger)
-import { store } from '@/store/store'
+// import gsap from 'gsap'
+// import { ScrollTrigger } from 'gsap/ScrollTrigger'
+// gsap.registerPlugin(ScrollTrigger)
 import { useRoute } from 'vue-router'
 const route = useRoute()
 const { client } = usePrismic()
@@ -57,6 +58,7 @@ import { components } from "~/slices"
 const hero = ref(null)
 const middle = ref(null)
 const bottom = ref(null)
+const videoDom = ref(null)
 
 onMounted(() => {
   let heroWords = hero.value.querySelectorAll('.split-words')
@@ -70,68 +72,6 @@ onMounted(() => {
   .fromTo(heroWords, {autoAlpha:0, y:'100%' }, {autoAlpha:1, y:'0%', duration: 1.2, stagger:0.1, ease:'expo.out'}, '-=1')
   .fromTo(heroCTA, {autoAlpha:0, y:'100%' }, {autoAlpha:1, y:'0%', duration: 1.2, ease:'expo.out'}, '-=1')
 
-  const middleTimeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: middle.value,
-      pin: false,   // pin the trigger element while active
-      start: "top top", // when the top of the trigger hits the top of the viewport
-      end: "bottom bottom", // end after scrolling 500px beyond the start
-      scrub: 1, // smooth scrubbing, takes 1 second to "catch up" to the scrollbar
-      markers: false
-    }
-  })
-  let middleWords = middle.value.querySelectorAll('.split-words')
-  let middleImg1 = middle.value.querySelectorAll('.middle-image1')
-  let middleImg2 = middle.value.querySelectorAll('.middle-image2')
-  let middleContent = middle.value.querySelectorAll('.middle-content-labor, button')
-  middleTimeline
-  .fromTo(middleWords, {autoAlpha:0, y:'100%'}, {autoAlpha:1, y:'0%', ease:'power3.out',stagger:0.2, duration:3})
-  .fromTo(middleContent, {autoAlpha:0, y:'100%'}, {autoAlpha:1, y:'0%', ease:'power3.out',stagger:0.2, duration:3})
-
-  const image1Timeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: middle.value,
-      pin: false,   // pin the trigger element while active
-      start: "top middle", // when the top of the trigger hits the top of the viewport
-      end: "bottom top", // end after scrolling 500px beyond the start
-      scrub: 1, // smooth scrubbing, takes 1 second to "catch up" to the scrollbar
-      markers: false
-    }
-  })
-
-  const image2Timeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: middle.value,
-      pin: false,   // pin the trigger element while active
-      start: "top middle", // when the top of the trigger hits the top of the viewport
-      end: "bottom top", // end after scrolling 500px beyond the start
-      scrub: 1, // smooth scrubbing, takes 1 second to "catch up" to the scrollbar
-      markers: false
-    }
-  })
-
-  image1Timeline
-  .fromTo(middleImg1, {autoAlpha:0}, {autoAlpha:1, y:'50%', x:'-30%', rotate:9, duration:6, ease:'power2.out'})
-
-
-  image2Timeline
-  .fromTo(middleImg2, {autoAlpha:0}, {autoAlpha:1, y:'-20%', x:'30%', rotate:-9, duration:6, ease:'power2.out'})
-
-  const bottomHero = gsap.timeline({
-    scrollTrigger: {
-      trigger: bottom.value,
-      pin: false,   // pin the trigger element while active
-      start: "top bottom", // when the top of the trigger hits the top of the viewport
-      end: "bottom bottom", // end after scrolling 500px beyond the start
-      scrub: 1, // smooth scrubbing, takes 1 second to "catch up" to the scrollbar
-      markers: false
-    }
-  })
-  let bottomWords = bottom.value.querySelectorAll('.split-words')
-  bottomHero
-  .fromTo(bottomWords, {autoAlpha:0, y:'100%'}, {autoAlpha:1, y:'0%', ease:'power2.out',stagger:0.4, duration:3}, 3)
-
-  store.menuOpen = false
 })
 </script>
 
@@ -141,7 +81,7 @@ onMounted(() => {
 .split-words {
   display: inline-block;
   margin-right: 0.35em;
-  opacity: 0;
+  // opacity: 0;
   transform-style: preserve-3d;
 }
 
@@ -286,6 +226,7 @@ onMounted(() => {
   }
 
   &-image1, &-image2 {
+    opacity: 0;
     position: absolute;
     z-index: 4;
     width: 25vw;
@@ -322,6 +263,8 @@ onMounted(() => {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  border-top-left-radius: 200px;
+  border-top-right-radius: 200px;
 
   &-content {
     display: flex;

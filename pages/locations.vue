@@ -2,7 +2,7 @@
   <main>
     <section class="slider-content">
       <div class="slider" ref="slider">
-        <div class="location" v-for="(location, i) in page.locations" :key="location.i" :class="{current: currentIndex === i}" >
+        <div class="location" v-for="(location, i) in page.locations" :key="location.i" :class="{current: currentIndex === i}">
           <div class="location-image">
             <div class="location-image-wrapper">
               <prismic-image :field="location.image" />
@@ -16,9 +16,9 @@
               <prismic-text class="text" :field="location.title" />
             </div>
             <div class="location-cta">
-              <NuxtLink :to="location.link.slug">
+              <a :href="location.link.slug">
                 <button><prismic-text :field="location.button" /></button>
-              </NuxtLink>
+              </a>
             </div>
           </div>
           <div class="location-background">
@@ -41,22 +41,22 @@
 </template>
 
 <script setup>
-import { store } from '@/store/store'
 const { client } = usePrismic()
 const { data: cmsData } = await useAsyncData('locations', () => client.getSingle('locations'))
 const page = cmsData.value.data
-console.log(page)
+console.log(page.locations[0].link)
 import { components } from "~/slices"
 
 import { gsap } from 'gsap'
 import { Observer } from 'gsap/Observer'
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, nextTick, onUnmounted } from 'vue'
 gsap.registerPlugin(Observer)
 
 let currentIndex = ref(0)
 let animating = false
 let slider = ref(null)
 let wrap = gsap.utils.wrap(0, page.locations.length)
+let observer;
 gsap.registerPlugin(Observer)
 
 function GoToSlide(oldIndex, index, direction) {
@@ -83,7 +83,8 @@ function GoToSlide(oldIndex, index, direction) {
         rotateX:0,
         y:'0%',
         z:0,
-        transformOrigin: 'top center'
+        transformOrigin: 'top center',
+        perspectiveOrigin: 'bottom'
       }, {
         z:50,
         y:'-80%',
@@ -107,11 +108,13 @@ function GoToSlide(oldIndex, index, direction) {
         autoAlpha:1,
         y:'0%',
         x:'0%',
-        rotate:8
+        rotateX:0, 
+        rotateY:8,
       }, {
         y:'-60%',
         x:'-30%',
-        rotate:24,
+        rotateX:30, 
+        rotateY:24,
         autoAlpha:0,
         duration: 1.4,
         ease:'expo.inOut'
@@ -132,9 +135,11 @@ function GoToSlide(oldIndex, index, direction) {
         autoAlpha: 0,
         y:'60%',
         x:'40%',
-        rotate:-12,
+        rotateX:-40, 
+        rotateY:-5,
       }, {
-        rotate:8,
+        rotateX:0, 
+        rotateY:8,
         y:'0%',
         x:'0%',
         autoAlpha:1,
@@ -143,10 +148,10 @@ function GoToSlide(oldIndex, index, direction) {
       }, '-=0.7')
       .fromTo(newText, {
         z:-50,
-        y:'80%',
         rotateX:90, 
+        y:'80%',
         autoAlpha: 0,
-        transformOrigin: 'bottom center'
+        transformOrigin: 'bottom bottom'
       }, {
         z:0,
         y:'0%',
@@ -177,8 +182,28 @@ function GoToSlide(oldIndex, index, direction) {
   currentIndex.value = index
 }
 
+class Slider {
+  init() {
+    this.observer = Observer.create({
+      type: "wheel,touch",
+      wheelSpeed: -1,
+      onDown: () => {
+        !animating && GoToSlide(currentIndex.value, currentIndex.value - 1, -1)
+      },
+      onUp: () => {
+        !animating && GoToSlide(currentIndex.value, currentIndex.value + 1, 1)
+      },
+      tolerance: 10,
+      preventDefault: true,
+    })
+  }
+  destroy() {
+    this.observer.kill()
+  }
+}
+const sliderGesture = new Slider()
+
 onMounted(() => {
-  store.menuOpen = false
   function Once() {
     let slides = slider.value.querySelectorAll('.location')
     let Text = slides[0].querySelectorAll('.location-content .text')
@@ -205,7 +230,8 @@ onMounted(() => {
       y:'80%',
       rotateX:90, 
       autoAlpha: 0,
-      transformOrigin: 'bottom center'
+      transformOrigin: 'bottom center',
+      perspectiveOrigin: 'bottom left'
     }, {
       z:0,
       y:'0%',
@@ -224,30 +250,22 @@ onMounted(() => {
       ease:'expo.out'
     }, '-=1.4')
     .fromTo(Bg, {
-      scale:0.8,
+      // scale:0.8,
       autoAlpha:0
     }, {
-      scale:1,
+      // scale:1,
       autoAlpha:1,
       stagger:0.2,
       ease:'expo.out',
       duration: 1.6
     }, '-=1.6')
   }
-  Observer.create({
-    type: "wheel,touch,pointer",
-    wheelSpeed: -1,
-    onDown: () => {
-      !animating && GoToSlide(currentIndex.value, currentIndex.value - 1, -1)
-    },
-    onUp: () => {
-      !animating && GoToSlide(currentIndex.value, currentIndex.value + 1, 1)
-    },
-    tolerance: 10,
-    preventDefault: true,
-  })
-
   Once()
+  sliderGesture.init()
+})
+
+onUnmounted(() => {
+  sliderGesture.destroy()
 })
 
 </script>
@@ -262,12 +280,19 @@ onMounted(() => {
   z-index: 2;
 }
 .location {
+  // visibility: hidden;
+  pointer-events: none;
   position: fixed;
   top: 0;
   left: 0;
   overflow: hidden;
   width: 100vw;
   height: 100vh;
+
+  &.current {
+    // visibility: visible;
+    pointer-events: all;
+  }
 
   &-title {
     font-family: 'Sharp Grotesk';
@@ -303,6 +328,7 @@ onMounted(() => {
       overflow: hidden;
       transform: rotate(-8deg);
       opacity: 0;
+      transform-style: preserve-3d;
 
       img {
         width: 100%;
@@ -326,6 +352,7 @@ onMounted(() => {
     }
 
     .circle1 {
+      position: absolute;
       transform-origin: center center;
       top: 50%;
       left: 50%;
@@ -333,10 +360,10 @@ onMounted(() => {
       height: 70vw;
       border-radius: 100%;
       border: 1px solid rgba(255, 255, 255, 0.3);
-      position: absolute;
       transform: translate(-50%, -50%);
     }
     .circle2 {
+      position: absolute;
       transform-origin: center center;
       top: 50%;
       left: 50%;
@@ -344,7 +371,6 @@ onMounted(() => {
       height: 95vw;
       border-radius: 100%;
       border: 1px solid rgba(255, 255, 255, 0.15);
-      position: absolute;
       transform: translate(-50%, -50%);
     }
   }
