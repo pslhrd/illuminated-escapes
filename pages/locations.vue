@@ -16,9 +16,9 @@
               <prismic-text class="text" :field="location.title" />
             </div>
             <div class="location-cta">
-              <a :href="location.link.slug">
+              <NuxtLink :to="location.link.slug">
                 <button><prismic-text :field="location.button" /></button>
-              </a>
+              </NuxtLink>
             </div>
           </div>
           <div class="location-background">
@@ -203,6 +203,31 @@ class Slider {
 }
 const sliderGesture = new Slider()
 
+definePageMeta({
+  pageTransition: {
+    name: 'locations',
+    appear: true, 
+    css: false,
+    mode: 'out-in',
+    onEnter: (el, done) => {
+      gsap.from(el, {opacity:0, duration:0.6, ease:'expo.out'})
+      setTimeout(() => {done()}, 600) 
+    },
+    onLeave: (el, done) => {
+      const image = el.querySelector('.current .location-image-wrapper')
+      const text = el.querySelector('.current .location-title')
+      const button = el.querySelector('.current .location-cta')
+      const background = el.querySelector('.current .location-background')
+      gsap.to(image, {width:'100vw',height:'100vh', top:0,opacity:0.6, left:0, rotate:0, borderRadius: '0px', duration:2, ease:'expo.inOut'})
+      gsap.to(text, {opacity:0, y:'-100%', duration:1.4, ease:'expo.inOut'})
+      gsap.to(button, {opacity:0, y:'-100%', duration:1.4, ease:'expo.inOut'})
+      gsap.to(background, {opacity:0, scale:0, stagger:0.1, duration:1.4, ease:'expo.inOut'})
+      setTimeout(() => {done()}, 2000) 
+    },
+  }
+})
+
+
 onMounted(() => {
   function Once() {
     let slides = slider.value.querySelectorAll('.location')
@@ -210,7 +235,7 @@ onMounted(() => {
     let Image = slides[0].querySelectorAll('.location-image-wrapper')
     let Button = slides[0].querySelectorAll('.location-cta')
     let Bg = slides[0].querySelectorAll('.location-background div')
-    const tl = gsap.timeline()
+    const tl = gsap.timeline({onComplete: sliderGesture.init()})
     tl
     .fromTo(Image, {
       autoAlpha: 0,
@@ -261,7 +286,6 @@ onMounted(() => {
     }, '-=1.6')
   }
   Once()
-  sliderGesture.init()
 })
 
 onUnmounted(() => {

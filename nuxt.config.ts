@@ -20,17 +20,17 @@ export default defineNuxtConfig({
   prismic: {
     endpoint: 'illuminated-escapes',
     // linkResolver: "@/prismic/linkResolver",
-    // clientConfig: {
-    //   routes: [
-    //     {
-    //       type: "location",
-    //       path: "/locations/:uid"
-    //     },
-    //     {
-    //       type: "home",
-    //       path: "/"
-    //     }
-    //   ]
-    // }
+    clientConfig: {
+      routes: [
+        {
+          type: "location",
+          path: "/:uid"
+        },
+        {
+          type: "home",
+          path: "/"
+        }
+      ]
+    }
   }
 })

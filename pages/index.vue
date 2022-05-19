@@ -1,13 +1,13 @@
 <template>
   <main class="main" v-smoothScroll>
     <div class="virtualScroll">
-      <section ref="hero" class="hero">
-        <div class="hero-content">
-          <div class="hero-content-title" v-splitWords>{{ $prismic.asText(page.title) }}</div>
+      <section ref="hero" class="index-hero">
+        <div class="index-hero-content">
+          <div class="index-hero-content-title" v-splitWords>{{ $prismic.asText(page.title) }}</div>
           <button>{{ $prismic.asText(page.button) }}</button>
         </div>
         <div class="video-wrapper">
-          <video ref="videoDom" src="@/public/videos/homepage.mp4" autoplay muted loop></video>
+          <video ref="videoDom" src="/videos/homepage.mp4" autoplay muted loop></video>
         </div>
       </section>
       <section ref="middle" class="middle">
@@ -45,9 +45,9 @@
 
 <script setup>
 import { ref, onMounted, nextTick } from 'vue'
-// import gsap from 'gsap'
-// import { ScrollTrigger } from 'gsap/ScrollTrigger'
-// gsap.registerPlugin(ScrollTrigger)
+import { gsap } from 'gsap/dist/gsap.js'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger.js'
+gsap.registerPlugin(ScrollTrigger)
 import { useRoute } from 'vue-router'
 const route = useRoute()
 const { client } = usePrismic()
@@ -85,10 +85,10 @@ onMounted(() => {
   transform-style: preserve-3d;
 }
 
-.hero {
+.index-hero {
   position: relative;
   width: 100%;
-  height: 90vh;
+  height: 100vh;
 
   &-content {
     position: relative;

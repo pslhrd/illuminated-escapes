@@ -1,35 +1,20 @@
 {
   "_cts": {
-    "teaser": {},
+    "dynamic": {},
     "post": {},
-    "home": {
-      "title": {
-        "config": {
-          "patternType": "PARAGRAPH",
-          "blocks": 1
-        }
-      }
-    },
-    "about": {},
-    "menu": {
-      "links": {}
-    },
+    "services": {},
+    "contact": {},
     "locations": {
       "locations": {}
     },
     "location": {}
   },
   "slices": {
-    "ImagePush": {
+    "GoogleMaps": {
       "default": {
         "primary": {}
       }
     },
-    "LocationHero": {},
-    "LocationDescription": {
-      "default": {
-        "primary": {}
-      }
-    }
+    "LocationDescription": {}
   }
 }

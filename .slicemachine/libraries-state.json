@@ -1,38 +1,40 @@
 {
   "slices": {
     "components": {
-      "image_push": {
+      "google_maps": {
         "library": "slices",
-        "id": "image_push",
-        "name": "ImagePush",
-        "description": "ImagePush",
+        "id": "google_maps",
+        "name": "GoogleMaps",
+        "description": "GoogleMaps",
         "model": {
-          "id": "image_push",
+          "id": "google_maps",
           "type": "SharedSlice",
-          "name": "ImagePush",
-          "description": "ImagePush",
+          "name": "GoogleMaps",
+          "description": "GoogleMaps",
           "variations": [
             {
               "id": "default",
               "name": "Default",
               "docURL": "...",
               "version": "sktwi1xtmkfgx8626",
-              "description": "ImagePush",
+              "description": "GoogleMaps",
               "primary": {
-                "title": {
+                "latitute": {
                   "type": "StructuredText",
                   "config": {
-                    "single": "heading1",
-                    "label": "Title",
-                    "placeholder": "This is where it all begins..."
+                    "label": "Latitute",
+                    "placeholder": "",
+                    "allowTargetBlank": true,
+                    "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
                   }
                 },
-                "image": {
-                  "type": "Image",
+                "longitude": {
+                  "type": "StructuredText",
                   "config": {
-                    "label": "Image",
-                    "constraint": {},
-                    "thumbnails": []
+                    "label": "Longitude",
+                    "placeholder": "",
+                    "allowTargetBlank": true,
+                    "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
                   }
                 }
               },
@@ -45,25 +47,23 @@
           "default": {
             "variation": "default",
             "name": "Default",
-            "slice_type": "image_push",
+            "slice_type": "google_maps",
             "items": [],
             "primary": {
-              "title": [
+              "latitute": [
                 {
-                  "type": "heading1",
-                  "text": "Revolutionize frictionless networks",
+                  "type": "paragraph",
+                  "text": "Aliqua anim consectetur culpa nisi mollit amet do dolor sunt qui magna. Aliqua mollit anim non quis aliqua nulla. Esse et ex incididunt fugiat incididunt voluptate.",
                   "spans": []
                 }
               ],
-              "image": {
-                "dimensions": {
-                  "width": 900,
-                  "height": 500
-                },
-                "alt": "Placeholder image",
-                "copyright": null,
-                "url": "https://images.unsplash.com/photo-1587905069134-008460d7a636?w=900&h=500&fit=crop"
-              }
+              "longitude": [
+                {
+                  "type": "paragraph",
+                  "text": "Lorem eu laboris anim eiusmod consequat dolore reprehenderit non ad mollit nostrud elit. Dolore labore enim aute duis veniam laboris sit fugiat. Veniam dolor magna ad incididunt anim laborum.",
+                  "spans": []
+                }
+              ]
             }
           }
         },
@@ -133,6 +133,15 @@
                     "allowTargetBlank": true,
                     "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
                   }
+                },
+                "specs": {
+                  "type": "StructuredText",
+                  "config": {
+                    "label": "Specs",
+                    "placeholder": "",
+                    "allowTargetBlank": true,
+                    "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                  }
                 }
               },
               "items": {},
@@ -150,14 +159,14 @@
               "subtitle": [
                 {
                   "type": "paragraph",
-                  "text": "Do id excepteur deserunt proident eu ipsum exercitation commodo. In consectetur ea sint deserunt ad et non nisi excepteur sit exercitation in sunt.",
+                  "text": "Incididunt laborum nulla non magna voluptate irure ut duis laboris mollit veniam quis consequat. Esse fugiat ea aliquip irure in magna ad eiusmod nulla occaecat voluptate occaecat excepteur sit. Aute proident enim cupidatat sunt velit do sunt laborum.",
                   "spans": []
                 }
               ],
               "description": [
                 {
                   "type": "paragraph",
-                  "text": "Anim aliqua velit tempor consequat labore pariatur duis voluptate et. Ullamco pariatur Lorem amet nostrud laboris. Amet eiusmod ad anim nostrud non ex.",
+                  "text": "Aute minim proident laboris excepteur deserunt aliquip. Officia excepteur ut exercitation laborum reprehenderit aliqua.",
                   "spans": []
                 }
               ],
@@ -168,7 +177,7 @@
                 },
                 "alt": "Placeholder image",
                 "copyright": null,
-                "url": "https://images.unsplash.com/photo-1576662712957-9c79ae1280f8?w=900&h=500&fit=crop"
+                "url": "https://images.unsplash.com/photo-1531771686035-25f47595c87a?w=900&h=500&fit=crop"
               },
               "description2": {
                 "dimensions": {
@@ -177,12 +186,19 @@
                 },
                 "alt": "Placeholder image",
                 "copyright": null,
-                "url": "https://images.unsplash.com/photo-1606248897732-2c5ffe759c04?w=900&h=500&fit=crop"
+                "url": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=900&h=500&fit=crop"
               },
               "labor": [
                 {
                   "type": "paragraph",
-                  "text": "Irure enim mollit non sint laboris irure quis et aute amet ipsum laboris minim ea exercitation.",
+                  "text": "Ea ut eu incididunt ex fugiat commodo Lorem nisi minim. Ut deserunt occaecat ipsum amet.",
+                  "spans": []
+                }
+              ],
+              "specs": [
+                {
+                  "type": "paragraph",
+                  "text": "Anim aliqua cillum dolor. Aute labore incididunt nostrud irure non aliqua sint in aute excepteur qui. Est eiusmod aliquip elit.",
                   "spans": []
                 }
               ]
@@ -270,14 +286,14 @@
               "title": [
                 {
                   "type": "heading1",
-                  "text": "Benchmark frictionless partnerships",
+                  "text": "Transform granular e-services",
                   "spans": []
                 }
               ],
               "description": [
                 {
                   "type": "paragraph",
-                  "text": "Anim magna sunt duis culpa.",
+                  "text": "Dolor deserunt minim aliquip do ut aute esse dolore nisi irure reprehenderit officia. Magna enim voluptate adipisicing aute sint ex anim adipisicing sit laborum aliqua deserunt mollit esse. Veniam sint do aute consequat laborum ad ullamco.",
                   "spans": []
                 }
               ],
@@ -288,16 +304,86 @@
                 },
                 "alt": "Placeholder image",
                 "copyright": null,
-                "url": "https://images.unsplash.com/photo-1545239351-1141bd82e8a6?w=900&h=500&fit=crop"
+                "url": "https://images.unsplash.com/photo-1560457079-9a6532ccb118?w=900&h=500&fit=crop"
               },
               "link": {
                 "link_type": "Web",
-                "url": "https://prismic.io"
+                "url": "http://twitter.com"
               },
               "button": [
                 {
                   "type": "paragraph",
-                  "text": "Velit minim voluptate cillum. Aute nulla magna veniam esse eu nulla.",
+                  "text": "Nostrud voluptate dolor labore laboris excepteur exercitation sit voluptate mollit elit minim consectetur pariatur exercitation magna. Nostrud eu incididunt consequat non ea.",
+                  "spans": []
+                }
+              ]
+            }
+          }
+        },
+        "meta": {
+          "fileName": "index",
+          "extension": "vue"
+        },
+        "screenshotPaths": {}
+      },
+      "test_slice": {
+        "library": "slices",
+        "id": "test_slice",
+        "name": "TestSlice",
+        "description": "TestSlice",
+        "model": {
+          "id": "test_slice",
+          "type": "SharedSlice",
+          "name": "TestSlice",
+          "description": "TestSlice",
+          "variations": [
+            {
+              "id": "default",
+              "name": "Default",
+              "docURL": "...",
+              "version": "sktwi1xtmkfgx8626",
+              "description": "TestSlice",
+              "primary": {
+                "title": {
+                  "type": "StructuredText",
+                  "config": {
+                    "single": "heading1",
+                    "label": "Title",
+                    "placeholder": "This is where it all begins..."
+                  }
+                },
+                "description": {
+                  "type": "StructuredText",
+                  "config": {
+                    "single": "paragraph",
+                    "label": "Description",
+                    "placeholder": "A nice description of your product"
+                  }
+                }
+              },
+              "items": {},
+              "imageUrl": "https://images.prismic.io/slice-machine/621a5ec4-0387-4bc5-9860-2dd46cbc07cd_default_ss.png?auto=compress,format"
+            }
+          ]
+        },
+        "mocks": {
+          "default": {
+            "variation": "default",
+            "name": "Default",
+            "slice_type": "test_slice",
+            "items": [],
+            "primary": {
+              "title": [
+                {
+                  "type": "heading1",
+                  "text": "Synthesize dynamic experiences",
+                  "spans": []
+                }
+              ],
+              "description": [
+                {
+                  "type": "paragraph",
+                  "text": "Ullamco ipsum commodo enim sunt eiusmod pariatur.",
                   "spans": []
                 }
               ]

@@ -14,15 +14,12 @@
   const nuxtApp = useNuxtApp()
     
   nuxtApp.hook('page:start', () => {
-    console.log('done')
     if (store.menuOpen === true) {
-      console.log('launched')
       store.menuOpen = false
     }
   })
   nuxtApp.hook('page:finish', () => {
     if (store.menuOpen === true) {
-      console.log('launched')
       store.menuOpen = false
     }
   })

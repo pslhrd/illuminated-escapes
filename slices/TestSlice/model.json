@@ -1,15 +1,15 @@
 {
-  "id": "image_push",
+  "id": "test_slice",
   "type": "SharedSlice",
-  "name": "ImagePush",
-  "description": "ImagePush",
+  "name": "TestSlice",
+  "description": "TestSlice",
   "variations": [
     {
       "id": "default",
       "name": "Default",
       "docURL": "...",
       "version": "sktwi1xtmkfgx8626",
-      "description": "ImagePush",
+      "description": "TestSlice",
       "primary": {
         "title": {
           "type": "StructuredText",
@@ -19,12 +19,12 @@
             "placeholder": "This is where it all begins..."
           }
         },
-        "image": {
-          "type": "Image",
+        "description": {
+          "type": "StructuredText",
           "config": {
-            "label": "Image",
-            "constraint": {},
-            "thumbnails": []
+            "single": "paragraph",
+            "label": "Description",
+            "placeholder": "A nice description of your product"
           }
         }
       },
