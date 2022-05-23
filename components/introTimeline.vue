@@ -32,7 +32,7 @@ class timelineCanvas {
     this.canvas.width = 1920
     this.canvas.height = 1080
     const currentFrame = index => (
-      '/public/timeline/SONAR' + (index + 1) + '.webp'
+      '/timeline/SONAR' + (index + 1) + '.webp'
     )
     
     for (let i = 0; i < this.frameCount; i++) {
