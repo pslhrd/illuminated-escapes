@@ -3,12 +3,14 @@
 import GoogleMaps from './GoogleMaps';
 import LocationDescription from './LocationDescription';
 import LocationHero from './LocationHero';
+import LocationInformations from './LocationInformations';
 import TestSlice from './TestSlice';
 
 export {
 	GoogleMaps,
 	LocationDescription,
 	LocationHero,
+	LocationInformations,
 	TestSlice,
 };
 
@@ -16,5 +18,6 @@ export const components = {
 	google_maps: GoogleMaps,
 	location_description: LocationDescription,
 	location_hero: LocationHero,
+	location_informations: LocationInformations,
 	test_slice: TestSlice,
 };

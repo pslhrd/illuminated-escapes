@@ -13,7 +13,7 @@
         <NuxtLink to="/about">About</NuxtLink>
         <NuxtLink to="/services">Services</NuxtLink>
         <NuxtLink to="/locations">Locations</NuxtLink>
-        <NuxtLink to="/contact">Contact</NuxtLink>
+        <NuxtLink to="/humber-river">Contact</NuxtLink>
         <!-- <div v-for="(link, i) in props.data.links" key="link.i">
         </div> -->
       </div>
@@ -40,6 +40,9 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+@mixin wide-mobile {
+  @media (max-width: 800px) { @content; }
+}
 
   .logo {
     position: fixed;
@@ -51,6 +54,14 @@ onMounted(() => {
     width: 100px;
     text-align: center;
     font-family: 'Sharp Grotesk', Helvetica, sans-serif;
+
+    @include wide-mobile() {
+      font-size: 14px;
+      text-align: left;
+      left: 40px;
+      top: 50px;
+      transform: translateX(0%);
+    }
   }
 
   .openMenu {
@@ -60,6 +71,10 @@ onMounted(() => {
     z-index: 5;
     text-transform: uppercase;
     font-family: 'Sharp Grotesk', Helvetica, sans-serif;
+    @include wide-mobile() {
+      top: 40px;
+      right: 40px;
+    }
 
     button {
       display: flex;
@@ -116,6 +131,9 @@ onMounted(() => {
       background-color: white;
       transform: translateX(100%);
       transition: transform 0.8s cubic-bezier(.35,.17,.25,1);
+      @include wide-mobile() {
+        width: 80%;
+      }
     }
 
     &-content {
@@ -128,6 +146,10 @@ onMounted(() => {
       color: black;
       font-family: 'Sharp Grotesk';
       font-size: 90px;
+      @include wide-mobile() {
+        font-size: 40px;
+        gap: 10px;
+      }
 
       a {
         transition: opacity 0.4s cubic-bezier(.35,.17,.25,1);
@@ -145,6 +167,10 @@ onMounted(() => {
       text-transform: uppercase;
       font-family: 'Sharp Grotesk', Helvetica, sans-serif;
       color: black;
+      @include wide-mobile() {
+        top: 40px;
+        right: 40px;
+      }
 
       button {
         display: block;

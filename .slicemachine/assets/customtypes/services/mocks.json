@@ -1,14 +1,43 @@
 {
-  "id": "18cc8222-dd3e-4555-a52f-40164079ae8a",
-  "uid": "voluptatum-minima-aut",
-  "type": "services",
+  "id": "7a1d53ed-5035-411d-a0c3-7c0b97150ce7",
+  "uid": "velit-voluptatum-aliquam",
+  "type": "Services",
   "data": {
-    "title": [
+    "leftimage": {
+      "dimensions": {
+        "width": 900,
+        "height": 500
+      },
+      "alt": "Placeholder image",
+      "copyright": null,
+      "url": "https://images.unsplash.com/photo-1587840171670-8b850147754e?w=900&h=500&fit=crop"
+    },
+    "rightimage": {
+      "dimensions": {
+        "width": 900,
+        "height": 500
+      },
+      "alt": "Placeholder image",
+      "copyright": null,
+      "url": "https://images.unsplash.com/photo-1606248897732-2c5ffe759c04?w=900&h=500&fit=crop"
+    },
+    "lefttext": [
       {
         "type": "paragraph",
-        "text": "Et sint sunt do irure elit veniam.",
+        "text": "Tempor tempor ullamco anim sint.",
         "spans": []
       }
-    ]
+    ],
+    "rightext": [
+      {
+        "type": "paragraph",
+        "text": "Labore irure dolore est officia magna. Voluptate reprehenderit do minim pariatur ex pariatur culpa esse commodo veniam mollit velit velit cupidatat.",
+        "spans": []
+      }
+    ],
+    "rightlink": {
+      "link_type": "Web",
+      "url": "https://slicemachine.dev"
+    }
   }
 }

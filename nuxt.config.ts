@@ -7,12 +7,22 @@ export default defineNuxtConfig({
     '@/assets/fonts/fonts.scss',
     '@/assets/styles/main.scss',
     '@/assets/styles/reset.scss',
+    '@/assets/styles/_variables.scss'
   ],
-  // styleResources: {
-  //   scss: [
-  //     '@/assets/style/variables.scss' // use underscore "_" & also file extension ".scss"
-  //   ]
-  // },
+  vite: {
+    css: {
+      preprocessorOptions: {
+        sass: {
+              additionalData: '@import "@/assets/styles/_variables.scss"',
+        },
+      },
+    }
+  },
+  styleResources: {
+    scss: [
+      '@/assets/style/_variables.scss' // use underscore "_" & also file extension ".scss"
+    ]
+  },
   modules: [
     '@nuxtjs/prismic'
     // '@nuxtjs/style-resources'

@@ -2,6 +2,7 @@
   import { gsap } from 'gsap/dist/gsap.js'
   import { components } from "~/slices"
   import { useRoute } from 'vue-router'
+  import { ref, onMounted, nextTick } from 'vue'
   const route = useRoute() 
   const uid = String(route.params.uid)
 
@@ -16,17 +17,6 @@
       name: 'locations',
       css: false,
       mode: 'out-in',
-      onEnter: (el, done) => {
-        const text = el.querySelector('.location-hero-content-title')
-        const image = el.querySelector('.location-hero-background')
-        gsap.from(text, {
-          y:'100%',
-          opacity:0,
-          duration:1.2,
-          ease:'power4.out',
-          delay:0.2
-        })
-      },
       onLeave: (el, done) => {
         console.log(el)
         gsap.to(el, {opacity:0, duration:0.6, ease:'expo.out'})
@@ -34,17 +24,11 @@
       },
     }
   })
-
-  // cmsData.value.data.slices.forEach(slice => {
-  //   if (slice.slice_type === 'google_maps') {
-  //     mapData = slice.primary
-  //     isGoogle = true
-  //   }
-  // })
+  
 </script>
 
 <template>
-  <main>
+  <main ref="location">
     <!-- <h1>{{page.title}}</h1> -->
     <!-- <div v-if="page.content">{{page.content[0].text}}</div>
     <img v-if="page.heroimage" :src="page.heroimage.url" /> -->

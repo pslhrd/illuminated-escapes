@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 import { gsap } from 'gsap/dist/gsap.js'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger.js'
 gsap.registerPlugin(ScrollTrigger)
@@ -61,12 +62,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@mixin wide-mobile {
+  @media (max-width: 800px) { @content; }
+}
 .location-description {
   width: 100%;
   position: relative;
-  padding-top: 150px;
-  padding-bottom: 150px;
+  padding-top: 200px;
+  padding-bottom: 200px;
   background-color: white;
+
+  @include wide-mobile() {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
 
   .wrapper {
     display: flex;
@@ -90,6 +99,13 @@ export default {
     line-height: 22px;
     text-align: left;
     color: black;
+
+    @include wide-mobile() {
+      width: 80vw;
+      margin-left: 10vw;
+      font-size: 16px;
+      line-height: 24px;
+    }
   }
 
   .images {
@@ -100,6 +116,9 @@ export default {
     height: 100%;
     top: 0;
     left: 0;
+    @include wide-mobile() {
+      display: none;
+    }
 
     &-first {
       top: 5%;
@@ -130,12 +149,18 @@ export default {
   }
 
   .description {
-    width: 60vw;
+    width: 80vw;
     font-family: 'Sharp Grotesk';
-    font-size: 8vw;
+    font-size: 7vw;
     color: black;
     text-transform: uppercase;
     margin-bottom: 150px;
+
+    @include wide-mobile() {
+      font-size: 45px;
+      width: 90vw;
+      margin-bottom: 75px;
+    }
   }
 }
 </style>

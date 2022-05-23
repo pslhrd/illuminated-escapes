@@ -5,106 +5,73 @@
 </template>
 
 <script setup>
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { ref, onMounted } from 'vue'
+import { gsap } from 'gsap/dist/gsap.js'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger.js'
+import { Observer } from 'gsap/dist/Observer.js'
+import { ref, onMounted, onUnmounted } from 'vue'
+import { store } from '@/store/store'
 gsap.registerPlugin(ScrollTrigger)
+
+const props = defineProps(['frame'])
 
 const container = ref(null)
 const canvas = ref(null)
-const { $LocomotiveScroll } = useNuxtApp()
+let renderLoop = 0
 
-class Scroll {
-  constructor(container) {
+class timelineCanvas {
+  constructor(canvas, container) {
+    this.canvas = canvas
     this.container = container
   }
 
   init() {
-    this.scroll = new $LocomotiveScroll({
-      el: this.container,
-      smooth: true,
-      getDirection: true,
-      scrollFromAnywhere: true
-    })
-    this.scroll.on('scroll', ScrollTrigger.update)
-    ScrollTrigger.scrollerProxy(this.container, {
-      scrollTop (value) {
-        return arguments.length ? this.scroll.scrollTo(value, 0, 0) : this.scroll.scroll.instance.scroll.y
-      },
-      getBoundingClientRect () {
-        return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight }
-      },
-      pinType: this.container.style.transform ? 'transform' : 'fixed'
-    })
-    ScrollTrigger.addEventListener('refresh', () => this.scroll.update())
-    ScrollTrigger.refresh()
-  }
-
-  destroy() {
-    this.scroll.destroy()
-  }
-
-  update() {
-    this.scroll.update()
-  }
-}
-
-function initCanvas(canvas, container) {
-  let context = canvas.getContext('2d')
-  let images = []
-  let scrolledFrame = {
-    frame: 0
-  }
-  let frameCount = 301
-  
-  canvas.width = 1920
-  canvas.height = 1080
-  const currentFrame = index => (
-    '/public/timeline/SONAR' + (index + 1) + '.webp'
-  )
-  
-  for (let i = 0; i < frameCount; i++) {
-    let img = new Image()
-    img.src = currentFrame(i)
-    images.push(img)
-  }
-
-  images[0].onload = render
-
-  gsap.timeline({
-    onUpdate: render,
-    scrollTrigger: {
-      trigger: container,
-      start: 'top top',
-      end: 'bottom bottom',
-      scrub: 2,
-      markers: true
+    this.context = this.canvas.getContext('2d')
+    this.images = []
+    this.frameCount = 301
+    
+    this.canvas.width = 1920
+    this.canvas.height = 1080
+    const currentFrame = index => (
+      '/public/timeline/SONAR' + (index + 1) + '.webp'
+    )
+    
+    for (let i = 0; i < this.frameCount; i++) {
+      let img = new Image()
+      img.src = currentFrame(i)
+      this.images.push(img)
     }
-  })
-  .to(scrolledFrame, {
-    frame: frameCount - 1,
-    snap: "frame",
-    ease: "none",
-    duration: 2
-  }, 0)
+    console.log(this.images)
 
-  function render() {
-    context.clearRect(0, 0, canvas.width, canvas.height)
-    context.drawImage(images[scrolledFrame.frame], 0, 0)
+    this.images[0].onload = this.render()
+  }
+
+  render() {
+    // console.log(store.frame)
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    this.context.drawImage(this.images[store.frame], 0, 0)
   }
 }
 
 onMounted(() => {
-  const smoothScroll = new Scroll(container.value)
-  // smoothScroll.init()
-  initCanvas(canvas.value, container.value)
+  renderLoop = () => {
+    newCanvas.render()
+    requestAnimationFrame(renderLoop)
+  }
+  const newCanvas = new timelineCanvas(canvas.value, container.value)
+  newCanvas.init()
+  gsap.fromTo(canvas.value,{scale:0.7, autoAlpha:0}, {scale:1, autoAlpha:1, duration:1.4, ease:'power4.out'}, 1)
+  requestAnimationFrame(renderLoop)
+})
+
+onUnmounted(() => {
+  renderLoop = null
 })
 </script>
 
 <style lang="scss" scoped>
 .canvas-wrapper {
   position: fixed;
-  z-index: 4;
+  z-index: 1;
   width: 100vw;
   height: 100vh;
   pointer-events: none;

@@ -7,7 +7,9 @@
     "locations": {
       "locations": {}
     },
-    "location": {}
+    "location": {},
+    "about": {},
+    "summer": {}
   },
   "slices": {
     "GoogleMaps": {
@@ -15,6 +17,11 @@
         "primary": {}
       }
     },
-    "LocationDescription": {}
+    "LocationDescription": {},
+    "LocationInformations": {
+      "default": {
+        "primary": {}
+      }
+    }
   }
 }

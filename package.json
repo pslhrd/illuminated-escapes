@@ -18,8 +18,9 @@
     "@prismicio/slice-simulator-vue": "^0.2.1",
     "gsap": "^3.10.4",
     "locomotive-scroll": "^4.1.4",
+    "node-sass": "^7.0.1",
     "nuxt-gmaps": "^1.2.10",
-    "sass": "^1.51.0",
-    "sass-loader": "^12.6.0"
+    "sass": "^1.52.1",
+    "sass-loader": "^13.0.0"
   }
 }

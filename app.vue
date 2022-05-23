@@ -28,8 +28,8 @@
 
 <style lang="scss" scoped>
 .app {
-  width: 100vw;
+  width: 100%;
   overflow-x: hidden;
-  // min-height: 100vh;
+  min-height: 100vh;
 }
 </style>

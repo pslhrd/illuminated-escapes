@@ -1,6 +1,6 @@
 <template>
   <main class="main" v-smoothScroll>
-    <div class="virtualScroll">
+    <div>
       <section ref="hero" class="index-hero">
         <div class="index-hero-content">
           <div class="index-hero-content-title" v-splitWords>{{ $prismic.asText(page.title) }}</div>
@@ -36,10 +36,8 @@
           <div class="bottom-content-subtitle">{{ $prismic.asText(page.subtitle2) }}</div>
           <div v-splitWords class="bottom-content-title">{{ $prismic.asText(page.title2) }}</div>
         </div>
-        <!-- <div class="bottom-background"></div> -->
       </section>
     </div>
-    <!-- <slice-zone v-if="page.slices && page.slices.length" :slices="page.slices" :components="components"/> -->
   </main>
 </template>
 
@@ -78,6 +76,11 @@ onMounted(() => {
 
 <style lang="scss">
 
+@mixin wide-mobile {
+  @media (max-width: 800px) { @content; }
+}
+
+
 .split-words {
   display: inline-block;
   margin-right: 0.35em;
@@ -106,6 +109,11 @@ onMounted(() => {
       letter-spacing: 0.02em;
       font-family: 'Sharp Grotesk';
       text-align: center;
+
+      @include wide-mobile() {
+        font-size: 60px;
+        width: 90%;
+      }
     }
 
     button {
@@ -128,7 +136,7 @@ onMounted(() => {
     z-index: 1;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 100vw;
     height: 100%;
     pointer-events: none;
     overflow: hidden;
@@ -145,7 +153,7 @@ onMounted(() => {
   position: relative;
   z-index: 3;
   width: 100%;
-  height: 150vh;
+  height: 120vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -214,6 +222,10 @@ onMounted(() => {
       font-size: 10vw;
       font-family: 'Sharp Grotesk';
 
+      @include wide-mobile() {
+        font-size: 60px;
+      }
+
       span {
         display: block;
         text-align: center;
@@ -256,15 +268,19 @@ onMounted(() => {
 .bottom {
   position: relative;
   width: 100%;
-  height: 90vh;
+  height: 100vh;
   z-index: 3;
   background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border-top-left-radius: 200px;
-  border-top-right-radius: 200px;
+
+  @include wide-mobile() {
+    height: 70vh;
+  }
+  // border-top-left-radius: 200px;
+  // border-top-right-radius: 200px;
 
   &-content {
     display: flex;
@@ -285,6 +301,10 @@ onMounted(() => {
       font-family: 'Sharp Grotesk';
       color: black;
       width: 50%;
+      @include wide-mobile() {
+        font-size: 60px;
+        width: 90%;
+      }
     }
   }
   

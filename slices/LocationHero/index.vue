@@ -20,6 +20,7 @@
 import { getSliceComponentProps } from "@prismicio/vue";
 import { gsap } from 'gsap/dist/gsap.js'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger.js'
+import { store } from '@/store/store'
 gsap.registerPlugin(ScrollTrigger)
 
 export default {
@@ -29,39 +30,70 @@ export default {
 
   methods: {
     createAnimations() {
+      console.log(ScrollTrigger.getAll())
+      ScrollTrigger.refresh()
       gsap.from(this.$refs.title, {
         y:'100%',
         opacity:0,
         duration:1.2,
-        ease:'power4.out',
-        delay:0.2
+        ease:'power4.out'
       })
-      // gsap.to(this.$refs.image.$el, {
-      //   scrollTrigger: {
-      //     trigger: this.$refs.container,
-      //     start: "top top",
-      //     end: "bottom top",
-      //     scrub: 1,
-      //   },
-      //   opacity: 0,
-      //   rotate: 3,
-      //   scale: 1.2
-      // })
+      gsap.to(this.$refs.image.$el, {
+        scrollTrigger: {
+          trigger: this.$refs.container,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1,
+        },
+        opacity: 0,
+        rotate: 3,
+        scale: 1.2
+      })
+    },
+
+    killAnimations() {
+      let triggers = ScrollTrigger.getAll()
+      for (let trigger of triggers) {
+        trigger.kill(true)
+      }
     }
   },
 
   mounted() {
-    this.createAnimations()
+    ScrollTrigger.update()
+    // console.log(store.isTransition)
+    if (store.isTransition === true ) {
+      console.log('launched')
+      setTimeout(() => {
+        this.createAnimations()
+        ScrollTrigger.refresh()
+        ScrollTrigger.update()
+      }, 1500)
+    } else {
+      this.createAnimations()
+    }
   },
+
+  beforeUnmount() {
+    store.isTransition = false
+    this.killAnimations()
+  }
 }
 </script>
 
 <style lang="scss" scoped>
+@mixin wide-mobile {
+  @media (max-width: 800px) { @content; }
+}
 .location {
   &-hero {
     position: relative;
     width: 100%;
     height: 100vh;
+
+    @include wide-mobile() {
+      height: 90vh;
+    }
 
     &-content {
       position: absolute;
@@ -74,6 +106,10 @@ export default {
         font-family: 'Sharp Grotesk';
         font-size: 10vw;
         color: white;
+        @include wide-mobile() {
+          font-size: 50px;
+          margin-bottom: 20px;
+        }
       }
 
       &-cta {

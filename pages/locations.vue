@@ -16,7 +16,7 @@
               <prismic-text class="text" :field="location.title" />
             </div>
             <div class="location-cta">
-              <NuxtLink :to="location.link.slug">
+              <NuxtLink :to="location.link.slug" @click="store.isLocation = true">
                 <button><prismic-text :field="location.button" /></button>
               </NuxtLink>
             </div>
@@ -42,22 +42,23 @@
 
 <script setup>
 const { client } = usePrismic()
+import { store } from '@/store/store'
 const { data: cmsData } = await useAsyncData('locations', () => client.getSingle('locations'))
 const page = cmsData.value.data
-console.log(page.locations[0].link)
 import { components } from "~/slices"
 
-import { gsap } from 'gsap'
-import { Observer } from 'gsap/Observer'
-import { ref, onMounted, nextTick, onUnmounted } from 'vue'
-gsap.registerPlugin(Observer)
+import { gsap } from 'gsap/dist/gsap.js'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger.js'
+import { Observer } from 'gsap/dist/Observer.js'
+import { ref, onMounted, nextTick, onUnmounted, reactive } from 'vue'
+gsap.registerPlugin(Observer, ScrollTrigger)
 
 let currentIndex = ref(0)
 let animating = false
 let slider = ref(null)
 let wrap = gsap.utils.wrap(0, page.locations.length)
 let observer;
-gsap.registerPlugin(Observer)
+let isLocation = ref(false)
 
 function GoToSlide(oldIndex, index, direction) {
   animating = true
@@ -107,14 +108,12 @@ function GoToSlide(oldIndex, index, direction) {
       .fromTo(oldImage, {
         autoAlpha:1,
         y:'0%',
-        x:'0%',
-        rotateX:0, 
-        rotateY:8,
+        x:'0%', 
+        rotate:8,
       }, {
         y:'-60%',
         x:'-30%',
-        rotateX:30, 
-        rotateY:24,
+        rotate:30,
         autoAlpha:0,
         duration: 1.4,
         ease:'expo.inOut'
@@ -135,11 +134,9 @@ function GoToSlide(oldIndex, index, direction) {
         autoAlpha: 0,
         y:'60%',
         x:'40%',
-        rotateX:-40, 
-        rotateY:-5,
+        rotate:-20, 
       }, {
-        rotateX:0, 
-        rotateY:8,
+        rotate:8, 
         y:'0%',
         x:'0%',
         autoAlpha:1,
@@ -206,10 +203,10 @@ const sliderGesture = new Slider()
 definePageMeta({
   pageTransition: {
     name: 'locations',
-    appear: true, 
+    appear: false, 
     css: false,
     mode: 'out-in',
-    onEnter: (el, done) => {
+    onEnter: (el, done) => {    
       gsap.from(el, {opacity:0, duration:0.6, ease:'expo.out'})
       setTimeout(() => {done()}, 600) 
     },
@@ -218,17 +215,24 @@ definePageMeta({
       const text = el.querySelector('.current .location-title')
       const button = el.querySelector('.current .location-cta')
       const background = el.querySelector('.current .location-background')
-      gsap.to(image, {width:'100vw',height:'100vh', top:0,opacity:0.6, left:0, rotate:0, borderRadius: '0px', duration:2, ease:'expo.inOut'})
-      gsap.to(text, {opacity:0, y:'-100%', duration:1.4, ease:'expo.inOut'})
-      gsap.to(button, {opacity:0, y:'-100%', duration:1.4, ease:'expo.inOut'})
-      gsap.to(background, {opacity:0, scale:0, stagger:0.1, duration:1.4, ease:'expo.inOut'})
-      setTimeout(() => {done()}, 2000) 
-    },
+      if (store.isLocation === true) {
+        store.isTransition = true
+        gsap.to(image, {width:'100vw',height:'100vh', top:0, left:0, rotate:0, opacity:0.6, borderRadius: '0px', duration:1.5, ease:'expo.inOut'})
+        gsap.to(text, {opacity:0, y:'-100%', duration:1.4, ease:'expo.inOut'})
+        gsap.to(button, {opacity:0, y:'-100%', duration:1.4, ease:'expo.inOut'})
+        setTimeout(() => {done()}, 1500) 
+        gsap.to(background, {opacity:0, scale:0, stagger:0.1, duration:1.4, ease:'expo.inOut'})
+      } else {
+        gsap.to(el, {opacity:0, duration:0.6, ease:'expo.out'})
+        setTimeout(() => {done()}, 600) 
+      }
+    }
   }
 })
 
 
 onMounted(() => {
+  store.isLocation = false
   function Once() {
     let slides = slider.value.querySelectorAll('.location')
     let Text = slides[0].querySelectorAll('.location-content .text')
@@ -296,10 +300,12 @@ onUnmounted(() => {
 
 
 <style lang="scss" scoped>
-
+@mixin wide-mobile {
+  @media (max-width: 800px) { @content; }
+}
 .slider-content {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
   z-index: 2;
 }
@@ -311,7 +317,7 @@ onUnmounted(() => {
   left: 0;
   overflow: hidden;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
 
   &.current {
     // visibility: visible;
@@ -321,25 +327,45 @@ onUnmounted(() => {
   &-title {
     font-family: 'Sharp Grotesk';
     font-size: 6vw;
+    @include wide-mobile() {
+      font-size: 44px;
+      text-align: center;
+    }
   }
 
   &-cta {
     opacity: 0;
     transform-style: preserve-3d;
     padding-top: 20px;
+
+    &:hover {
+      button {
+        transform: scale(1.1);
+      }
+    }
+
+    a {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
     button {
       padding: 15px 30px;
       border-radius: 35px;
       background-color: white;
       color: black;
       font-size: 12px;
+      transition: transform 0.6s cubic-bezier(.0,.0,.0,1);
     }
   }
 
   &-image {
+    position: relative;
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
     display: flex;
+    z-index: 3;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -353,6 +379,11 @@ onUnmounted(() => {
       transform: rotate(-8deg);
       opacity: 0;
       transform-style: preserve-3d;
+      @include wide-mobile() {
+        width: 60vw;
+        height: 50vh;
+      }
+      
 
       img {
         width: 100%;
@@ -366,10 +397,11 @@ onUnmounted(() => {
     pointer-events: none;
     position: absolute;
     overflow: hidden;
+    z-index: 0;
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
 
     div {
       opacity: 0;
@@ -378,6 +410,7 @@ onUnmounted(() => {
     .circle1 {
       position: absolute;
       transform-origin: center center;
+      z-index: 0;
       top: 50%;
       left: 50%;
       width: 70vw;
@@ -385,8 +418,13 @@ onUnmounted(() => {
       border-radius: 100%;
       border: 1px solid rgba(255, 255, 255, 0.3);
       transform: translate(-50%, -50%);
+      @include wide-mobile() {
+        width: 100vw;
+        height: 100vw;
+      }
     }
     .circle2 {
+      z-index: 0;
       position: absolute;
       transform-origin: center center;
       top: 50%;
@@ -396,12 +434,17 @@ onUnmounted(() => {
       border-radius: 100%;
       border: 1px solid rgba(255, 255, 255, 0.15);
       transform: translate(-50%, -50%);
+      @include wide-mobile() {
+        width: 130vw;
+        height: 130vw;
+      }
     }
   }
 
   &-content {
     position: absolute;
     top: 0;
+    z-index: 3;
     left: 0;
     width: 100%;
     height: 100%;
@@ -427,7 +470,7 @@ onUnmounted(() => {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
 
 
   @keyframes particles {
