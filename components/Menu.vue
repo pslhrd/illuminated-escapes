@@ -13,7 +13,7 @@
         <NuxtLink to="/about">About</NuxtLink>
         <NuxtLink to="/services">Services</NuxtLink>
         <NuxtLink to="/locations">Locations</NuxtLink>
-        <NuxtLink to="/humber-river">Contact</NuxtLink>
+        <!-- <NuxtLink to="/humber-river">Contact</NuxtLink> -->
         <!-- <div v-for="(link, i) in props.data.links" key="link.i">
         </div> -->
       </div>

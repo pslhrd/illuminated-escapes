@@ -1,8 +1,11 @@
 <template>
   <main class="about">
+    <Head>
+      <Title>Illuminated Escapes - About</Title>
+    </Head>
     <div class="about-slider" ref="slider">
       <div class="slide"  v-for="(slide, i) in page.sections" :key="slide.i" :class="{current: currentIndex === i}">
-        <div class="number">{{ slide.number }}</div>
+        <PrismicRichText :field="slide.number" class="number"/>
         <div class="title">
           <span v-for="(line, i) in slide.title" :key="line.i">{{ line.text }}</span>
         </div>
@@ -211,7 +214,7 @@ onUnmounted(() => {
 
     .number {
       opacity: 0;
-      width: 35px;
+      width: 50px;
       height: 35px;
       background-color: #1FCEDB;
       display: flex;

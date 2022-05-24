@@ -29,6 +29,9 @@
 
 <template>
   <main ref="location">
+    <Head>
+      <Title>Illuminated Escapes - Locations</Title>
+    </Head>
     <!-- <h1>{{page.title}}</h1> -->
     <!-- <div v-if="page.content">{{page.content[0].text}}</div>
     <img v-if="page.heroimage" :src="page.heroimage.url" /> -->

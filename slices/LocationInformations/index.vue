@@ -35,7 +35,7 @@ export default {
     display: flex;
 
     @include wide-mobile() {
-      flex-direction: column;
+      flex-direction: column-reverse;
       height: 180vh;
     }
 

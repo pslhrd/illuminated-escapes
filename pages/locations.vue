@@ -1,5 +1,8 @@
 <template>
   <main>
+    <Head>
+      <Title>Illuminated Escapes - Locations</Title>
+    </Head>
     <section class="slider-content">
       <div class="slider" ref="slider">
         <div class="location" v-for="(location, i) in page.locations" :key="location.i" :class="{current: currentIndex === i}">
@@ -27,6 +30,9 @@
           </div>
         </div>
       </div>
+    </section>
+    <section class="slider-count">
+      <div class="count"  v-for="(location, i) in page.locations" :key="location.i" :class="{current: currentIndex === i}"></div>
     </section>
     <!-- <section class="particles">
       <div class="wrapper">
@@ -204,11 +210,11 @@ definePageMeta({
   pageTransition: {
     name: 'locations',
     appear: false, 
-    css: false,
+    css: true,
     mode: 'out-in',
     onEnter: (el, done) => {    
-      gsap.from(el, {opacity:0, duration:0.6, ease:'expo.out'})
-      setTimeout(() => {done()}, 600) 
+      // gsap.from(el, {opacity:0, duration:0.6, ease:'expo.out'})
+      // setTimeout(() => {done()}, 600) 
     },
     onLeave: (el, done) => {
       const image = el.querySelector('.current .location-image-wrapper')
@@ -302,6 +308,30 @@ onUnmounted(() => {
 <style lang="scss" scoped>
 @mixin wide-mobile {
   @media (max-width: 800px) { @content; }
+}
+
+.slider-count {
+  position: absolute;
+  width: 120px;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .count {
+    width: 10px;
+    height: 10px;
+    border-radius: 15px;
+    // background-color: white;
+    border: 1px solid rgba(255, 255, 255, 0.557);
+    transition: background-color 1s cubic-bezier(.0,.0,.0,1);
+    &.current {
+      background-color: white;
+    }
+  }
 }
 .slider-content {
   width: 100%;

@@ -1,13 +1,18 @@
 <template>
   <main class="main" v-smoothScroll>
+    <Head>
+      <Title>Illuminated Escapes - Home</Title>
+    </Head>
     <div>
       <section ref="hero" class="index-hero">
         <div class="index-hero-content">
           <div class="index-hero-content-title" v-splitWords>{{ $prismic.asText(page.title) }}</div>
-          <button>{{ $prismic.asText(page.button) }}</button>
+          <NuxtLink to="/locations">
+            <button>{{ $prismic.asText(page.button) }}</button>
+          </NuxtLink>
         </div>
         <div class="video-wrapper">
-          <video ref="videoDom" src="/videos/homepage.mp4" autoplay muted loop></video>
+          <video ref="videoDom" src="/videos/homepage.mp4" autoplay muted loop playsinline></video>
         </div>
       </section>
       <section ref="middle" class="middle">
@@ -19,8 +24,10 @@
         </div>
         <div class="middle-content">
           <div class="middle-content-title" v-splitWords>{{ $prismic.asText(page.section1) }}</div>
-          <div class="middle-content-labor">{{ $prismic.asText(page.labor1) }}</div>
-          <button>{{ $prismic.asText(page.button1) }}</button>
+          <!-- <div class="middle-content-labor" v-if="page.labor1">{{ $prismic.asText(page.labor1) }}</div> -->
+          <NuxtLink to="/locations">
+            <button>{{ $prismic.asText(page.button1) }}</button>
+          </NuxtLink>
         </div>
         <div class="middle-background">
           <div class="wrapper">
@@ -31,18 +38,19 @@
           </div>
         </div>
       </section>
-      <section ref="bottom" class="bottom">
+      <!-- <section ref="bottom" class="bottom">
         <div class="bottom-content">
           <div class="bottom-content-subtitle">{{ $prismic.asText(page.subtitle2) }}</div>
-          <div v-splitWords class="bottom-content-title">{{ $prismic.asText(page.title2) }}</div>
+          <div class="bottom-content-title">{{ $prismic.asText(page.title2) }}</div>
         </div>
-      </section>
+      </section> -->
+      <Socials />
     </div>
   </main>
 </template>
 
 <script setup>
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, nextTick, onUnmounted } from 'vue'
 import { gsap } from 'gsap/dist/gsap.js'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger.js'
 gsap.registerPlugin(ScrollTrigger)
@@ -64,12 +72,49 @@ onMounted(() => {
   let heroCTA = hero.value.querySelectorAll('button')
   let videoWrapper = hero.value.querySelectorAll('.video-wrapper')
   let video = hero.value.querySelectorAll('.video-wrapper video')
+  setTimeout(() => {
+    ScrollTrigger.refresh()
+    ScrollTrigger.update()
+  }, 600)
   const tl = gsap.timeline()
   tl
   .fromTo(videoWrapper, {scale:0.8, autoAlpha:0}, {scale:1, autoAlpha:1, ease:'expo.out', duration:1.4})
   .fromTo(heroWords, {autoAlpha:0, y:'100%' }, {autoAlpha:1, y:'0%', duration: 1.2, stagger:0.1, ease:'expo.out'}, '-=1')
   .fromTo(heroCTA, {autoAlpha:0, y:'100%' }, {autoAlpha:1, y:'0%', duration: 1.2, ease:'expo.out'}, '-=1')
 
+  const firstImage = middle.value.querySelector('.middle-image1')
+  const secondImage = middle.value.querySelector('.middle-image2')
+  gsap.to(firstImage, {
+    scrollTrigger: {
+      trigger: middle.value,
+      start: "top bottom",
+      end: "bottom top",
+      scrub: 1,
+    },
+    y:'100%',
+    x:'-50%',
+    rotate: 10,
+  })
+
+  gsap.to(secondImage, {
+    scrollTrigger: {
+      trigger: middle.value,
+      start: "top middle",
+      end: "bottom top",
+      scrub: 1,
+    },
+    y:'-100%',
+    x:'50%',
+    rotate: -16,
+  })
+
+})
+
+onUnmounted(() => {
+  let triggers = ScrollTrigger.getAll()
+  for (let trigger of triggers) {
+    trigger.kill(true)
+  }
 })
 </script>
 
@@ -82,7 +127,7 @@ onMounted(() => {
 
 
 .split-words {
-  display: inline-block;
+  display: block;
   margin-right: 0.35em;
   // opacity: 0;
   transform-style: preserve-3d;
@@ -116,17 +161,20 @@ onMounted(() => {
       }
     }
 
-    button {
-      padding: 20px 40px;
-      background-color: #1FCEDB;
-      border-radius: 10px;
-      margin-top: 20px;
-      transform: translateY(0%);
-      filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.15));
-      // transition: transform 0.3s cubic-bezier(.35,.17,.25,1);
-
+    a {
+      button {
+        padding: 20px 40px;
+        background-color: #1FCEDB;
+        border-radius: 10px;
+        margin-top: 20px;
+        // transform: translateY(0%);
+        filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.15));
+        // transition: transform 0.3s cubic-bezier(.35,.17,.25,1);
+      }     
       &:hover {
-        transform: scale(1.1);
+        button {
+          transform: scale(1.1);
+        }
       }
     }
   }
@@ -153,11 +201,15 @@ onMounted(() => {
   position: relative;
   z-index: 3;
   width: 100%;
-  height: 120vh;
+  height: 140vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  @include wide-mobile() {
+    height: 100vh;
+  }
 
   &-background {
     pointer-events: none;
@@ -219,11 +271,11 @@ onMounted(() => {
     }
 
     &-title {
-      font-size: 10vw;
+      font-size: 6vw;
       font-family: 'Sharp Grotesk';
 
       @include wide-mobile() {
-        font-size: 60px;
+        font-size: 40px;
       }
 
       span {
@@ -238,14 +290,18 @@ onMounted(() => {
   }
 
   &-image1, &-image2 {
-    opacity: 0;
+    // opacity: 0;
     position: absolute;
     z-index: 4;
-    width: 25vw;
-    height: 35vw;
+    width: 14vw;
+    height: 16vw;
     overflow: hidden;
-    border-radius: 35px;
-    border: 6px solid white;
+    border-radius: 20px;
+
+    @include wide-mobile() {
+      width: 100px;
+      height: 150px;
+    }
 
     img {
       width: 100%;
@@ -255,12 +311,15 @@ onMounted(() => {
   }
 
   &-image1 {
-    top: -10%;
+    @include wide-mobile() {
+      display: none;
+    }
+    top: 10%;
     left: 10%;
   }
 
   &-image2 {
-    bottom: 0%;
+    bottom: 10%;
     right: 10%;
   }
 }
@@ -270,7 +329,7 @@ onMounted(() => {
   width: 100%;
   height: 100vh;
   z-index: 3;
-  background-color: white;
+  background-color: black;
   display: flex;
   justify-content: center;
   align-items: center;

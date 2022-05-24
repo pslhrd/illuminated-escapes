@@ -38,7 +38,7 @@ export default {
     gsap.to(this.$refs.first, {
       scrollTrigger: {
         trigger: this.$refs.container,
-        start: "top +=20%",
+        start: "top bottom",
         end: "bottom top",
         scrub: 1,
       },
@@ -49,7 +49,7 @@ export default {
     gsap.to(this.$refs.second, {
       scrollTrigger: {
         trigger: this.$refs.container,
-        start: "top top",
+        start: "top bottom",
         end: "bottom top",
         scrub: 1,
       },

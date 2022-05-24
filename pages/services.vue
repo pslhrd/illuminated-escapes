@@ -1,15 +1,21 @@
 <template>
   <main class="services">
+    <Head>
+      <Title>Illuminated Escapes - Services</Title>
+    </Head>
+    <div class="right">
+        <div class="right-wrapper">
+          <PrismicRichText :field="page.rightext" />
+            <button class="cta">LEARN MORE</button>
+        </div>
+        <PrismicImage :field="page.rightimage" />
+    </div>
     <div class="left">
       <div class="left-wrapper">
         <PrismicRichText :field="page.lefttext" />
-        <button class="cta">LEARN MORE</button>
+        <button class="cta">COMING SOON</button>
       </div>
       <PrismicImage :field="page.leftimage" />
-    </div>
-    <div class="right">
-      <div class="right-wrapper"><PrismicRichText :field="page.rightext" /><button class="cta">LEARN MORE</button></div>
-      <PrismicImage :field="page.rightimage" />
     </div>
   </main>
 </template>
@@ -30,10 +36,15 @@ onMounted(() => {
 }
   .services {
     width: 100vw;
-    height: 140vh;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    a {
+      width: 100%;
+      height: 100%;
+    }
     @include wide-mobile() {
       flex-direction: column;
     }
@@ -41,6 +52,12 @@ onMounted(() => {
     &:hover {
       img {
         opacity: 0.2;
+      }
+    }
+
+    .right {
+      &:hover {
+        cursor: pointer;
       }
     }
 
@@ -68,8 +85,6 @@ onMounted(() => {
       }
 
       &:hover {
-        cursor: pointer;
-
         .cta {
           opacity: 1;
           transform: translateY(0%);
