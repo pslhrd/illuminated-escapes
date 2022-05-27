@@ -212,10 +212,6 @@ definePageMeta({
     appear: false, 
     css: true,
     mode: 'out-in',
-    onEnter: (el, done) => {    
-      // gsap.from(el, {opacity:0, duration:0.6, ease:'expo.out'})
-      // setTimeout(() => {done()}, 600) 
-    },
     onLeave: (el, done) => {
       const image = el.querySelector('.current .location-image-wrapper')
       const text = el.querySelector('.current .location-title')

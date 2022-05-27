@@ -44,7 +44,7 @@
           <div class="bottom-content-title">{{ $prismic.asText(page.title2) }}</div>
         </div>
       </section> -->
-      <Socials />
+      <!-- <Socials /> -->
     </div>
   </main>
 </template>
