@@ -31,9 +31,9 @@
         </div>
       </div>
     </section>
-    <section class="slider-count">
+    <!-- <section class="slider-count">
       <div class="count"  v-for="(location, i) in page.locations" :key="location.i" :class="{current: currentIndex === i}"></div>
-    </section>
+    </section> -->
     <!-- <section class="particles">
       <div class="wrapper">
         <img src="@/public/images/particles.png">
@@ -57,7 +57,7 @@ import { gsap } from 'gsap/dist/gsap.js'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger.js'
 import { Observer } from 'gsap/dist/Observer.js'
 import { ref, onMounted, nextTick, onUnmounted, reactive } from 'vue'
-gsap.registerPlugin(Observer, ScrollTrigger)
+gsap.registerPlugin(Observer)
 
 let currentIndex = ref(0)
 let animating = false

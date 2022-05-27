@@ -7,5 +7,5 @@ export const store = reactive({
   frame: 0,
   isTransition: false,
   isBlack: false,
-  isOnce: true
+  isOnce: false
 })
