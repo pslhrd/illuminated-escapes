@@ -68,14 +68,14 @@ const bottom = ref(null)
 const videoDom = ref(null)
 
 onMounted(() => {
-  console.log(store.isLoaded)
-  const preloadDelay = store.isLoaded ? 0 : 4
-  console.log(preloadDelay, store.isLoaded)
+  window.scrollTo(0, 0)
+  const preloadDelay = store.isOnce ? 4 : 0
   let heroWords = hero.value.querySelectorAll('.split-words')
   let heroContent = hero.value.querySelectorAll('.hero-content')
   let heroCTA = hero.value.querySelectorAll('button')
   let videoWrapper = hero.value.querySelectorAll('.video-wrapper')
   let video = hero.value.querySelectorAll('.video-wrapper video')
+  let lines = middle.value.querySelectorAll('.split-words')
   setTimeout(() => {
     ScrollTrigger.refresh()
     ScrollTrigger.update()
@@ -88,29 +88,6 @@ onMounted(() => {
 
   const firstImage = middle.value.querySelector('.middle-image1')
   const secondImage = middle.value.querySelector('.middle-image2')
-  gsap.to(firstImage, {
-    scrollTrigger: {
-      trigger: middle.value,
-      start: "top bottom",
-      end: "bottom top",
-      scrub: 1,
-    },
-    y:'100%',
-    x:'-50%',
-    rotate: 10,
-  })
-
-  gsap.to(secondImage, {
-    scrollTrigger: {
-      trigger: middle.value,
-      start: "top middle",
-      end: "bottom top",
-      scrub: 1,
-    },
-    y:'-100%',
-    x:'50%',
-    rotate: -16,
-  })
 
 })
 

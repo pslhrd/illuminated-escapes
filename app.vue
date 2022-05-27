@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <!-- <Preloader /> -->
+    <Preloader />
     <Menu :data="menuData"/>
     <NuxtPage />
   </div>
@@ -25,6 +25,9 @@
     }
   })
   nuxtApp.hook('page:finish', () => {
+    if (store.isOnce === true) {
+      store.isOnce = false
+    }
     if (store.menuOpen === true) {
       store.menuOpen = false
     }

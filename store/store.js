@@ -6,5 +6,6 @@ export const store = reactive({
   isLoaded: false,
   frame: 0,
   isTransition: false,
-  isBlack: false
+  isBlack: false,
+  isOnce: true
 })
