@@ -11,7 +11,22 @@
     "about": {
       "sections": {}
     },
-    "summer": {}
+    "summer": {
+      "prices": {
+        "day": {
+          "config": {
+            "patternType": "PARAGRAPH",
+            "blocks": 1
+          }
+        },
+        "night": {
+          "config": {
+            "patternType": "PARAGRAPH",
+            "blocks": 1
+          }
+        }
+      }
+    }
   },
   "slices": {
     "GoogleMaps": {
@@ -19,10 +34,15 @@
         "primary": {}
       }
     },
-    "LocationDescription": {},
-    "LocationInformations": {
+    "LocationDescription": {
       "default": {
         "primary": {}
+      }
+    },
+    "LocationInformations": {
+      "default": {
+        "primary": {},
+        "items": {}
       }
     }
   }

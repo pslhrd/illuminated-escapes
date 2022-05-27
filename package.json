@@ -12,7 +12,7 @@
     "slice-machine-ui": "^0.3.7"
   },
   "dependencies": {
-    "@googlemaps/js-api-loader": "^1.14.2",
+    "@googlemaps/js-api-loader": "^1.14.3",
     "@nuxtjs/prismic": "^3.0.0-alpha.5",
     "@nuxtjs/style-resources": "^1.2.1",
     "@prismicio/slice-simulator-vue": "^0.2.1",

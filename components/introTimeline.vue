@@ -17,6 +17,7 @@ const props = defineProps(['frame'])
 const container = ref(null)
 const canvas = ref(null)
 let renderLoop = 0
+let raf = 0
 
 class timelineCanvas {
   constructor(canvas, container) {
@@ -40,7 +41,6 @@ class timelineCanvas {
       img.src = currentFrame(i)
       this.images.push(img)
     }
-    console.log(this.images)
 
     this.images[0].onload = this.render()
   }
@@ -53,17 +53,19 @@ class timelineCanvas {
 }
 
 onMounted(() => {
+  
   renderLoop = () => {
     newCanvas.render()
-    requestAnimationFrame(renderLoop)
+    raf = requestAnimationFrame(renderLoop)
   }
+  raf = requestAnimationFrame(renderLoop)
   const newCanvas = new timelineCanvas(canvas.value, container.value)
   newCanvas.init()
   gsap.fromTo(canvas.value,{scale:0.7, autoAlpha:0}, {scale:1, autoAlpha:1, duration:1.4, ease:'power4.out'}, 1)
-  requestAnimationFrame(renderLoop)
 })
 
 onUnmounted(() => {
+  window.cancelAnimationFrame(raf)
   renderLoop = null
 })
 </script>

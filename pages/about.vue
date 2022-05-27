@@ -127,7 +127,7 @@ onUnmounted(() => {
   @media (max-width: 800px) { @content; }
 }
 .about {
-  position: relative;
+  position: fixed;
   width: 100vw;
   min-height: 100vh;
   z-index: 2;
@@ -142,7 +142,7 @@ onUnmounted(() => {
 
   &-background {
     pointer-events: none;
-    position: absolute;
+    position: fixed;
     overflow: hidden;
     top: 0;
     left: 0;
@@ -179,7 +179,7 @@ onUnmounted(() => {
 
   .slide {
     pointer-events: none;
-    position: absolute;
+    position: fixed;
     z-index: 2;
     top: 0;
     left: 0;
@@ -249,11 +249,11 @@ onUnmounted(() => {
   z-index: 1;
   pointer-events: none;
   opacity: 1;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
 
 
   @keyframes particles {

@@ -113,12 +113,12 @@ function GoToSlide(oldIndex, index, direction) {
 
       .fromTo(oldImage, {
         autoAlpha:1,
-        y:'0%',
-        x:'0%', 
+        yPercent:0,
+        xPercent:0, 
         rotate:8,
       }, {
-        y:'-60%',
-        x:'-30%',
+        yPercent:-60,
+        xPercent:-30,
         rotate:30,
         autoAlpha:0,
         duration: 1.4,
@@ -138,13 +138,13 @@ function GoToSlide(oldIndex, index, direction) {
 
       .fromTo(newImage, {
         autoAlpha: 0,
-        y:'60%',
-        x:'40%',
+        yPercent:60,
+        xPercent:40,
         rotate:-20, 
       }, {
         rotate:8, 
-        y:'0%',
-        x:'0%',
+        yPercent:0,
+        xPercent:0,
         autoAlpha:1,
         duration: 1.4,
         ease:'expo.out'
@@ -311,7 +311,7 @@ onUnmounted(() => {
 }
 
 .slider-count {
-  position: absolute;
+  position: fixed;
   width: 120px;
   bottom: 40px;
   left: 50%;
@@ -391,7 +391,7 @@ onUnmounted(() => {
   }
 
   &-image {
-    position: relative;
+    position: fixed;
     width: 100%;
     min-height: 100vh;
     display: flex;
@@ -402,6 +402,7 @@ onUnmounted(() => {
     
 
     &-wrapper {
+      position: fixed;
       width: 25vw;
       height: 40vw;
       border-radius: 35px;
@@ -425,7 +426,7 @@ onUnmounted(() => {
 
   &-background {
     pointer-events: none;
-    position: absolute;
+    position: fixed;
     overflow: hidden;
     z-index: 0;
     top: 0;
@@ -438,7 +439,7 @@ onUnmounted(() => {
     }
 
     .circle1 {
-      position: absolute;
+      position: fixed;
       transform-origin: center center;
       z-index: 0;
       top: 50%;
@@ -455,7 +456,7 @@ onUnmounted(() => {
     }
     .circle2 {
       z-index: 0;
-      position: absolute;
+      position: fixed;
       transform-origin: center center;
       top: 50%;
       left: 50%;
@@ -472,7 +473,7 @@ onUnmounted(() => {
   }
 
   &-content {
-    position: absolute;
+    position: fixed;
     top: 0;
     z-index: 3;
     left: 0;
@@ -496,7 +497,7 @@ onUnmounted(() => {
   background-color: black;
   pointer-events: none;
   opacity: 0.5;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;

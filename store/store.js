@@ -3,6 +3,8 @@ import { reactive } from 'vue'
 export const store = reactive({
   menuOpen: false,
   isLocation: false,
+  isLoaded: false,
   frame: 0,
-  isTransition: false
+  isTransition: false,
+  isBlack: false
 })

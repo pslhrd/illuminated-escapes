@@ -16,6 +16,11 @@
         <PrismicRichText :field="slice.primary.description" />
       </div>
     </div>
+    <div class="cta"> 
+      <PrismicLink :field="slice.primary.link" target="_blank">
+        <PrismicRichText :field="slice.primary.button" />
+      </PrismicLink>   
+    </div>
     <div class="labor">
       <PrismicRichText :field="slice.primary.labor" />
     </div>
@@ -25,6 +30,7 @@
 <script>
 import { ref } from 'vue'
 import { gsap } from 'gsap/dist/gsap.js'
+import { store } from '@/store/store'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger.js'
 gsap.registerPlugin(ScrollTrigger)
 import { getSliceComponentProps } from "@prismicio/vue";
@@ -57,6 +63,15 @@ export default {
       x:'100%',
       rotate: -20,
     })
+    ScrollTrigger.create({
+      trigger: this.$refs.container,
+      start: 'top top',
+      end: 'bottom top',
+      onEnter: () => store.isBlack = true,
+      onLeave: () => store.isBlack = false,
+      onEnterBack: () => store.isBlack = true,
+      onLeaveBack: () => store.isBlack = false
+    })
   }
 }
 </script>
@@ -64,6 +79,36 @@ export default {
 <style lang="scss" scoped>
 @mixin wide-mobile {
   @media (max-width: 800px) { @content; }
+}
+.cta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+  margin-bottom: 100px;
+
+  a {
+    border: 1px solid black;
+    border-radius: 40px;
+    transition: transform 0.6s cubic-bezier(.0,.0,.0,1);
+    font-family: 'Sharp Grotesk';
+    text-transform: uppercase;
+    color: black;
+    display: flex;
+    width: 20%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    @include wide-mobile() {
+      width: 60%;
+    }
+    &:hover {
+      color: white;
+      transform: scale(1.1);
+      background-color: black;  
+    }
+  }
 }
 .location-description {
   width: 100%;
@@ -122,12 +167,12 @@ export default {
 
     &-first {
       top: 5%;
-      left: 10%;
+      left: 0%;
       transform: rotate(-21deg);
     }
 
     &-second {
-      right: 20%;
+      right: 10%;
       bottom: 15%;
       transform: rotate(6deg);
     }
@@ -154,7 +199,7 @@ export default {
     font-size: 7vw;
     color: black;
     text-transform: uppercase;
-    margin-bottom: 150px;
+    margin-bottom: 75px;
 
     @include wide-mobile() {
       font-size: 45px;

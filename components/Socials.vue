@@ -2,13 +2,13 @@
 <div class="socials" ref="socials">
   <div class="socials-video">
     <div class="wrapper">
-      <video ref="videoDom" src="/videos/kayak_animation.mp4" autoplay muted loop playsinline></video>
+      <img ref="videoDom" src="/images/still.jpg" />
     </div>
   </div>
   <div class="socials-links">
-    <span class="informations">Discover our socials networks !</span>
-    <button class="cta"><a>Instagram</a></button>
-    <button class="cta"><a>TikTok</a></button>
+    <span class="informations">Check us out!</span>
+    <a href="https://instagram.com/illuminatedescapes?igshid" target="_blank" class="cta">Instagram</a>
+    <a href="http://www.tiktok.com/illuminatedescapes" target="_blank" class="cta">TikTok</a>
   </div>
 </div>
 </template>
@@ -33,29 +33,33 @@
 
     &-links {
       // height: 30vh;
-      background-color: white;
+      // background-color: white;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 30px;
       padding-bottom: 10vh;
+
+      @include wide-mobile() {
+        margin-top: 40px;
+      }
     }
 
     .subtitle {
       font-family: 'Sharp Grotesk';
       font-size: 14px;
       text-transform: uppercase;
-      color: black;
+      color: white;
       opacity: 0.3;
     }
 
     .informations {
-      font-size: 60px;
+      font-size: 80px;
       font-family: 'Sharp Grotesk';
       text-transform: uppercase;
       width: 50%;
-      color: black;
+      color: white;
       text-align: center;
 
       @include wide-mobile() {
@@ -65,12 +69,17 @@
     }
 
     .cta {
+      display: block;
       width: 300px;
       height: 70px;
-      border: 1px solid black;
+      border: 1px solid rgba(255, 255, 255, 0.391);
       border-radius: 40px;
-      color: black;
+      color: white;
       transition: transform 0.6s cubic-bezier(.0,.0,.0,1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-transform: uppercase;
 
       @include wide-mobile() {
         width: 60%;
@@ -78,18 +87,14 @@
 
       &:hover {
         transform: scale(1.1);
-        background-color: black;
-
-        a {
-          color: white;
-          
-        }
+        background-color: white;
+        color: black;
       }
 
       a {
         font-family: 'Sharp Grotesk';
         text-transform: uppercase;
-        color: black;
+        color: white;
         display: flex;
         width: 100%;
         height: 100%;
@@ -122,10 +127,10 @@
         // border-radius: 40px;
         overflow: hidden;
       }
-      video {
+      img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
       }
       &:after {
         content:'';
@@ -134,7 +139,7 @@
         height: 30vh;
         bottom: 0;
         left: 0;
-        background-color: white;
+        // background-color: white;
       }
     }
   }

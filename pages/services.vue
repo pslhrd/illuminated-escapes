@@ -6,7 +6,9 @@
     <div class="right">
         <div class="right-wrapper">
           <PrismicRichText :field="page.rightext" />
-            <button class="cta">LEARN MORE</button>
+          <NuxtLink to='/summer' class="cta">
+            LEARN MORE
+          </NuxtLink>
         </div>
         <PrismicImage :field="page.rightimage" />
     </div>
@@ -25,6 +27,7 @@ import { ref, onMounted, nextTick } from 'vue'
 const { client } = usePrismic()
 const { data: cmsData } = await useAsyncData('services', () => client.getSingle('services'))
 const page = cmsData.value.data
+console.log(page)
 onMounted(() => {
 })
 </script>
@@ -47,6 +50,7 @@ onMounted(() => {
     }
     @include wide-mobile() {
       flex-direction: column;
+      height: 150vh;
     }
 
     &:hover {
@@ -73,6 +77,9 @@ onMounted(() => {
       }
 
       .cta {
+        width: auto;
+        height: auto;
+        display: block;
         opacity: 0;
         transform: translateY(50%);
         margin-top: 20px;

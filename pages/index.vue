@@ -50,6 +50,7 @@
 </template>
 
 <script setup>
+import { store } from '@/store/store'
 import { ref, onMounted, nextTick, onUnmounted } from 'vue'
 import { gsap } from 'gsap/dist/gsap.js'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger.js'
@@ -67,6 +68,9 @@ const bottom = ref(null)
 const videoDom = ref(null)
 
 onMounted(() => {
+  console.log(store.isLoaded)
+  const preloadDelay = store.isLoaded ? 0 : 4
+  console.log(preloadDelay, store.isLoaded)
   let heroWords = hero.value.querySelectorAll('.split-words')
   let heroContent = hero.value.querySelectorAll('.hero-content')
   let heroCTA = hero.value.querySelectorAll('button')
@@ -78,7 +82,7 @@ onMounted(() => {
   }, 600)
   const tl = gsap.timeline()
   tl
-  .fromTo(videoWrapper, {scale:0.8, autoAlpha:0}, {scale:1, autoAlpha:1, ease:'expo.out', duration:1.4})
+  .fromTo(videoWrapper, {scale:0.8, autoAlpha:0}, {scale:1, autoAlpha:1, ease:'expo.out', duration:1.4, delay:preloadDelay})
   .fromTo(heroWords, {autoAlpha:0, y:'100%' }, {autoAlpha:1, y:'0%', duration: 1.2, stagger:0.1, ease:'expo.out'}, '-=1')
   .fromTo(heroCTA, {autoAlpha:0, y:'100%' }, {autoAlpha:1, y:'0%', duration: 1.2, ease:'expo.out'}, '-=1')
 
@@ -150,7 +154,7 @@ onUnmounted(() => {
 
     &-title {
       width: 70%;
-      font-size: 120px;
+      font-size: 6vw;
       letter-spacing: 0.02em;
       font-family: 'Sharp Grotesk';
       text-align: center;
@@ -164,7 +168,7 @@ onUnmounted(() => {
     a {
       button {
         padding: 20px 40px;
-        background-color: #1FCEDB;
+        background-color: #6a33ce;
         border-radius: 10px;
         margin-top: 20px;
         // transform: translateY(0%);
@@ -283,14 +287,14 @@ onUnmounted(() => {
         text-align: center;
 
         &:nth-child(2) {
-          color: #00FCFC;
+          color: #6a33ce;
         }
       }
     }
   }
 
   &-image1, &-image2 {
-    // opacity: 0;
+    opacity: 0;
     position: absolute;
     z-index: 4;
     width: 14vw;

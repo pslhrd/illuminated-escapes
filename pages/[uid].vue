@@ -9,7 +9,7 @@
   const { client } = usePrismic()
   const { data: cmsData } = await useAsyncData(uid, () => client.getByUID('location', uid))
   const page = cmsData && cmsData.value ? cmsData.value.data : {title: 'page not found'}
-  let mapData
+  // let mapData
   let isGoogle = false
 
   definePageMeta({
@@ -36,7 +36,7 @@
     <!-- <div v-if="page.content">{{page.content[0].text}}</div>
     <img v-if="page.heroimage" :src="page.heroimage.url" /> -->
     <slice-zone v-if="page.slices && page.slices.length" :slices="page.slices" :components="components"/>
-    <!-- <Maps :googlemaps="mapData" v-if="isGoogle"/> -->
+    <!-- <Maps :latitude="mapData.primary.latitute[0].text"/> -->
   </main>
 </template>
 
