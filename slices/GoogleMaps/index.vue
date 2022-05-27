@@ -9,7 +9,16 @@
         <PrismicRichText class="informations" :field="slice.primary.informations" />
       </div>
       <div class="map-wrapper">
-        <div class="googleMap" ref="mapsDom"></div>
+          <GMapMap
+              :center="center"
+              :zoom="15"
+              map-type-id="terrain"
+              class="googleMap"
+          >
+            <GMapMarker
+                :position="center"
+            />
+          </GMapMap>
       </div>
     </div>
   </section>
@@ -21,13 +30,18 @@ import { store } from '@/store/store'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger.js'
 gsap.registerPlugin(ScrollTrigger)
 import { ref } from 'vue'
-import { Loader } from "@googlemaps/js-api-loader"
 import { getSliceComponentProps } from "@prismicio/vue"
 
 export default {
   name: "GoogleMaps",
   // The array passed to `getSliceComponentProps` is purely optional and acts as a visual hint for you
   props: getSliceComponentProps(["slice", "index", "slices", "context"]),
+
+  data() {
+    return {
+      center: {lat: parseFloat(this.$props.slice.primary.latitute[0].text), lng:parseFloat(this.$props.slice.primary.longitude[0].text)}
+    }
+  },
 
   mounted() {
     ScrollTrigger.create({
@@ -41,21 +55,21 @@ export default {
     })
     const latitude = parseFloat(this.$props.slice.primary.latitute[0].text)
     const longitude = parseFloat(this.$props.slice.primary.longitude[0].text)
-    const loader = new Loader({
-      apiKey: "AIzaSyC1jS1g0BQ1otZ2DQJuVrGndULXFVx8t3o",
-      version: "weekly"
-    })
-    const mapDom = this.$refs.mapsDom
-    loader.load().then(() => {
-      const map = new google.maps.Map(mapDom, {
-        center: { lat: latitude, lng: longitude },
-        zoom: 15,
-      })
-      const marker = new google.maps.Marker({
-        position: { lat: latitude, lng: longitude },
-        map: map,
-      })
-    })
+    // const loader = new Loader({
+    //   apiKey: "AIzaSyC1jS1g0BQ1otZ2DQJuVrGndULXFVx8t3o",
+    //   version: "weekly"
+    // })
+    // const mapDom = this.$refs.mapsDom
+    // loader.load().then(() => {
+    //   const map = new google.maps.Map(mapDom, {
+    //     center: { lat: latitude, lng: longitude },
+    //     zoom: 15,
+    //   })
+    //   const marker = new google.maps.Marker({
+    //     position: { lat: latitude, lng: longitude },
+    //     map: map,
+    //   })
+    // })
   },
 
   setup() {

@@ -40,9 +40,13 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    '@nuxtjs/prismic'
+    '@nuxtjs/prismic',
     // '@nuxtjs/style-resources'
   ],
+
+  build: {
+    transpile: ['@fawmi/vue-google-maps']
+  },
 
   prismic: {
     endpoint: 'illuminated-escapes',
