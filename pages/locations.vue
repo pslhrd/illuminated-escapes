@@ -3,6 +3,7 @@
     <Head>
       <Title>Illuminated Escapes - Locations</Title>
     </Head>
+    <Body class="isFixed">
     <section class="slider-content">
       <div class="slider" ref="slider">
         <div class="location" v-for="(location, i) in page.locations" :key="location.i" :class="{current: currentIndex === i}">
@@ -31,9 +32,10 @@
         </div>
       </div>
     </section>
-    <!-- <section class="slider-count">
+    <section class="slider-count">
       <div class="count"  v-for="(location, i) in page.locations" :key="location.i" :class="{current: currentIndex === i}"></div>
-    </section> -->
+    </section>
+    </Body>
     <!-- <section class="particles">
       <div class="wrapper">
         <img src="@/public/images/particles.png">
@@ -47,23 +49,21 @@
 </template>
 
 <script setup>
+import { ref, onMounted, nextTick, onUnmounted, reactive } from 'vue'
+import { gsap } from 'gsap/dist/gsap.js'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger.js'
+
 const { client } = usePrismic()
 import { store } from '@/store/store'
 const { data: cmsData } = await useAsyncData('locations', () => client.getSingle('locations'))
 const page = cmsData.value.data
 import { components } from "~/slices"
 
-import { gsap } from 'gsap/dist/gsap.js'
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger.js'
-import { Observer } from 'gsap/dist/Observer.js'
-import { ref, onMounted, nextTick, onUnmounted, reactive } from 'vue'
-gsap.registerPlugin(Observer)
 
 let currentIndex = ref(0)
 let animating = false
 let slider = ref(null)
 let wrap = gsap.utils.wrap(0, page.locations.length)
-let observer;
 let isLocation = ref(false)
 
 function GoToSlide(oldIndex, index, direction) {
@@ -186,29 +186,41 @@ function GoToSlide(oldIndex, index, direction) {
 }
 
 class Slider {
+  listenWheel(event) {
+    if (event.deltaY < 0) {
+      !animating && GoToSlide(currentIndex.value, currentIndex.value - 1, -1)
+    } else {
+      !animating && GoToSlide(currentIndex.value, currentIndex.value + 1, 1)
+    }
+  }
+  touchStart(event) {
+    this.start = event.changedTouches[0]
+  }
+  touchEnd(event) {
+    this.end = event.changedTouches[0]
+    if(end.screenY - start.screenY > 0) {
+      !animating && GoToSlide(currentIndex.value, currentIndex.value - 1, -1)
+    }
+    else if(end.screenY - start.screenY < 0) {
+      !animating && GoToSlide(currentIndex.value, currentIndex.value + 1, 1)
+    }
+  }
   init() {
-    this.observer = Observer.create({
-      type: "wheel,touch",
-      wheelSpeed: -1,
-      onDown: () => {
-        !animating && GoToSlide(currentIndex.value, currentIndex.value - 1, -1)
-      },
-      onUp: () => {
-        !animating && GoToSlide(currentIndex.value, currentIndex.value + 1, 1)
-      },
-      tolerance: 10,
-      preventDefault: true,
-    })
+    window.addEventListener('wheel', this.listenWheel)
+    window.addEventListener('touchstart', this.touchStart)
+    window.addEventListener('touchend', this.touchEnd)
   }
   destroy() {
-    this.observer.kill()
+    window.removeEventListener('wheel', this.listenWheel)
+    window.removeEventListener('touchstart', this.touchStart)
+    window.removeEventListener('touchend', this.touchEnd)
   }
 }
 const sliderGesture = new Slider()
 
 definePageMeta({
   pageTransition: {
-    name: 'locations',
+    name: 'location',
     appear: false, 
     css: true,
     mode: 'out-in',
@@ -330,6 +342,7 @@ onUnmounted(() => {
   }
 }
 .slider-content {
+  position: fixed;
   width: 100%;
   min-height: 100vh;
   position: relative;
@@ -343,7 +356,7 @@ onUnmounted(() => {
   left: 0;
   overflow: hidden;
   width: 100vw;
-  min-height: 100vh;
+  min-height: 100%;
 
   &.current {
     // visibility: visible;
@@ -389,7 +402,7 @@ onUnmounted(() => {
   &-image {
     position: fixed;
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
     display: flex;
     z-index: 3;
     justify-content: center;
@@ -428,7 +441,7 @@ onUnmounted(() => {
     top: 0;
     left: 0;
     width: 100vw;
-    min-height: 100vh;
+    min-height: 100%;
 
     div {
       opacity: 0;

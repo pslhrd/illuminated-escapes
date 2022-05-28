@@ -3,9 +3,9 @@
     <Head>
       <Title>Illuminated Escapes - About</Title>
     </Head>
+    <Body class="isFixed">
     <div class="about-slider" ref="slider">
       <div class="slide"  v-for="(slide, i) in page.sections" :key="slide.i" :class="{current: currentIndex === i}">
-        <PrismicRichText :field="slide.number" class="number"/>
         <div class="title">
           <span v-for="(line, i) in slide.title" :key="line.i">{{ line.text }}</span>
         </div>
@@ -13,6 +13,9 @@
       </div>
     </div>
     <IntroTimeline/>
+    <section class="slider-count">
+      <div class="count"  v-for="(slide, i) in page.sections" :key="slide.i" :class="{current: currentIndex === i}"></div>
+    </section>
 
     <section class="particles">
       <div class="wrapper">
@@ -22,6 +25,7 @@
         <img src="@/public/images/particles.png">
       </div>
     </section>
+    </Body>
   </main>
 </template>
 
@@ -122,6 +126,29 @@ onUnmounted(() => {
 
 
 <style lang="scss" scoped>
+.slider-count {
+  position: fixed;
+  width: 60px;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .count {
+    width: 10px;
+    height: 10px;
+    border-radius: 15px;
+    // background-color: white;
+    border: 1px solid rgba(255, 255, 255, 0.557);
+    transition: background-color 1s cubic-bezier(.0,.0,.0,1);
+    &.current {
+      background-color: white;
+    }
+  }
+}
 
 @mixin wide-mobile {
   @media (max-width: 800px) { @content; }
@@ -216,7 +243,7 @@ onUnmounted(() => {
       opacity: 0;
       width: 50px;
       height: 35px;
-      background-color: #1FCEDB;
+      background-color: #A6C4FF;
       display: flex;
       justify-content: center;
       align-items: center;

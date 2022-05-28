@@ -28,6 +28,9 @@
             },
             "location_informations": {
               "type": "SharedSlice"
+            },
+            "operation_hours": {
+              "type": "SharedSlice"
             }
           }
         }

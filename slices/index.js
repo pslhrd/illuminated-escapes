@@ -4,6 +4,7 @@ import GoogleMaps from './GoogleMaps';
 import LocationDescription from './LocationDescription';
 import LocationHero from './LocationHero';
 import LocationInformations from './LocationInformations';
+import OperationHours from './OperationHours';
 import TestSlice from './TestSlice';
 
 export {
@@ -11,6 +12,7 @@ export {
 	LocationDescription,
 	LocationHero,
 	LocationInformations,
+	OperationHours,
 	TestSlice,
 };
 
@@ -19,5 +21,6 @@ export const components = {
 	location_description: LocationDescription,
 	location_hero: LocationHero,
 	location_informations: LocationInformations,
+	operation_hours: OperationHours,
 	test_slice: TestSlice,
 };

@@ -72,6 +72,10 @@ export default {
       onEnterBack: () => store.isBlack = true,
       onLeaveBack: () => store.isBlack = false
     })
+  },
+
+  unmounted() {
+    store.isBlack = false
   }
 }
 </script>
@@ -118,8 +122,8 @@ export default {
   background-color: white;
 
   @include wide-mobile() {
-    padding-top: 120px;
-    padding-bottom: 120px;
+    padding-top: 40px;
+    padding-bottom: 40px;
   }
 
   .wrapper {

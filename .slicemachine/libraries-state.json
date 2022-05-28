@@ -460,6 +460,78 @@
         },
         "screenshotPaths": {}
       },
+      "operation_hours": {
+        "library": "slices",
+        "id": "operation_hours",
+        "name": "OperationHours",
+        "description": "OperationHours",
+        "model": {
+          "id": "operation_hours",
+          "type": "SharedSlice",
+          "name": "OperationHours",
+          "description": "OperationHours",
+          "variations": [
+            {
+              "id": "default",
+              "name": "Default",
+              "docURL": "...",
+              "version": "sktwi1xtmkfgx8626",
+              "description": "OperationHours",
+              "primary": {
+                "title": {
+                  "type": "StructuredText",
+                  "config": {
+                    "label": "Title",
+                    "placeholder": "",
+                    "allowTargetBlank": true,
+                    "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                  }
+                },
+                "hours": {
+                  "type": "StructuredText",
+                  "config": {
+                    "label": "Hours",
+                    "placeholder": "",
+                    "allowTargetBlank": true,
+                    "single": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                  }
+                }
+              },
+              "items": {},
+              "imageUrl": "https://images.prismic.io/slice-machine/621a5ec4-0387-4bc5-9860-2dd46cbc07cd_default_ss.png?auto=compress,format"
+            }
+          ]
+        },
+        "mocks": {
+          "default": {
+            "variation": "default",
+            "name": "Default",
+            "slice_type": "operation_hours",
+            "items": [],
+            "primary": {
+              "title": [
+                {
+                  "type": "paragraph",
+                  "text": "Mollit id incididunt consequat eiusmod laborum cupidatat irure dolore incididunt sit.",
+                  "spans": []
+                }
+              ],
+              "hours": [
+                {
+                  "type": "paragraph",
+                  "text": "Fugiat consequat ad in ad culpa qui sint ipsum.",
+                  "spans": []
+                }
+              ]
+            }
+          }
+        },
+        "meta": {
+          "fileName": "index",
+          "extension": "vue"
+        },
+        "screenshotPaths": {}
+      },
       "test_slice": {
         "library": "slices",
         "id": "test_slice",

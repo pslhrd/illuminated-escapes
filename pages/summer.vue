@@ -12,13 +12,13 @@
           <PrismicRichText :field="price.title" class="rate-title" />
           <PrismicRichText :field="price.day" class="rate-day"/>
           <PrismicRichText :field="price.night" class="rate-night"/>
-          <PrismicRichText :field="price.description" class="rate-description"/>
         </div>
         <div class="rate-background">
           <PrismicImage :field="price.image" />
         </div>
       </div>
     </div>
+    <PrismicRichText :field="page.description2"  class="added-description"/>
      <PrismicRichText :field="page.missions" class="mission-title"/>
     <div class="summer-missions">
       <div class="mission" v-for="(mission, i) in page.elements" :key="mission.i">
@@ -27,6 +27,10 @@
           <PrismicRichText :field="mission.content" class="content" />
         </div>
       </div>
+    </div>
+    <div class="lessons">
+      <PrismicRichText :field="page.lessons" class="lessons-title"/>
+      <PrismicRichText :field="page.description" class="lessons-description"/>
     </div>
     <div class="particles">
       <div class="wrapper">
@@ -51,16 +55,7 @@ const page = cmsData.value.data
 const summer = ref(null)
 
 onMounted(() => {
-  // window.scrollTo(0, 10)
-  // ScrollTrigger.create({
-  //   trigger: summer.value,
-  //   start: 'top top',
-  //   end: 'bottom top',
-  //   onEnter: () => store.isBlack = true,
-  //   onLeave: () => store.isBlack = true,
-  //   onEnterBack: () => store.isBlack = true,
-  //   onLeaveBack: () => store.isBlack = false
-  // })
+
 })
 </script>
 
@@ -100,11 +95,61 @@ onMounted(() => {
     }
   }
 
-  .mission-title {
+  .added-description {
+    position: relative;
+    transform: translateX(-50%);
+    left: 50%;
+    display: block;
+    width: 350px;
+    text-align: center;
+    opacity: 0.4;
+    font-size: 12px;
+  }
+
+  .lessons {
     width: 50%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    color: black;
+    border-radius: 50px;
+    padding: 5vw 10vw;
     margin-left: 25%;
+    margin-bottom: 150px;
+
+    &-title {
+      font-size: 60px;
+      font-family: 'Sharp Grotesk';
+
+      @include wide-mobile() {
+        font-size: 40px;
+      }
+    }
+
+    &-description {
+      width: 50%;
+      margin-top: 20px;
+      @include wide-mobile() {
+        width: 80%;
+      }
+    }
+
+    @include wide-mobile() {
+      width: 90%;
+      margin-left: 5%;
+      padding: 80px 80px;
+      border-radius: 25px;
+    }
+  }
+
+  .mission-title {
+    width: 40%;
+    margin-left: 30%;
     font-family: 'Sharp Grotesk';
-    font-size: 6vw;
+    font-size: 3.6vw;
     color: rgb(255, 255, 255);
     text-transform: uppercase;
     text-align: center;
@@ -112,7 +157,7 @@ onMounted(() => {
     margin-bottom: 150px;
 
     @include wide-mobile() {
-      font-size: 50px;
+      font-size: 40px;
       width: 80%;
       margin-left: 10%;
       margin-bottom: 75px;
@@ -144,7 +189,7 @@ onMounted(() => {
         color: white;
         width: 100%;
         height: 100%;
-        border: 1px solid rgba(255, 255, 255, 0.203);
+        // border: 1px solid rgba(255, 255, 255, 0.203);
         border-radius: 20px;
         display: flex;
         justify-content: center;
@@ -178,72 +223,55 @@ onMounted(() => {
   }
 
   &-rates {
-    padding-left: 10%;
-    padding-right: 10%;
     width: 100%;
-    height: 80vh;
     background-color: rgb(0, 0, 0);
     text-align: center;
     color: black;
-
     display: flex;
+    // flex-wrap: wrap;
+    // flex-direction: column;
 
     @include wide-mobile() {
       flex-direction: column;
       height: 100vh;
-      padding-left: 5%;
-      padding-right: 5%;
     }
 
     .rate {
-      width: 50%;
-      height: 100%;
+      margin-left: 0%;
+      width: 80%;
+      height: 80vh;
       position: relative;
-      padding-top: 40px;
-      padding-bottom: 40px;
+      display: flex;
+      margin-bottom: 40px;
 
       @include wide-mobile() {
+        margin-bottom: 0px;
+        padding: 20px;
         width: 100%;
         height: 50%;
-        padding-top: 10px;
-        padding-bottom: 10px;
       }
 
       &:nth-child(1) {
-        padding-right: 20px;
-        padding-left: 40px;
-
-        @include wide-mobile() {
-          padding-right: 0px;
-          padding-left: 0px;
-        }
       }
 
       &:nth-child(2) {
-        padding-right: 40px;
-        padding-left: 20px;
-        @include wide-mobile() {
-          padding-right: 0px;
-          padding-left: 0px;
-        }
+        flex-direction: row-reverse;
       }
 
       &-content {
         z-index: 4;
         width: 100%;
         height: 100%;
-        position: absolute;
-        left: 0;
-        top: 0;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
         text-align: center;
         color: white;
+        position: absolute;
 
         .rate-title {
-          font-size: 30px;
+          font-size: 50px;
           font-family: 'Sharp Grotesk';
           text-transform: uppercase;
           margin-bottom: 50px;
@@ -255,6 +283,7 @@ onMounted(() => {
         }
 
         .rate-day, .rate-night {
+          opacity: 0.4;
           margin-bottom: 5px;
           font-size: 20px;
           font-family: 'Sharp Grotesk';
@@ -277,12 +306,10 @@ onMounted(() => {
       &-background {
         width: 100%;
         height: 100%;
-        border-radius: 40px;
         overflow: hidden;
         background-color: black;
 
         @include wide-mobile() {
-          border-radius: 20px;
         }
 
         img {

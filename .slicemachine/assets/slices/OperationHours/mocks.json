@@ -1,0 +1,24 @@
+[
+  {
+    "variation": "default",
+    "name": "Default",
+    "slice_type": "operation_hours",
+    "items": [],
+    "primary": {
+      "title": [
+        {
+          "type": "paragraph",
+          "text": "Mollit id incididunt consequat eiusmod laborum cupidatat irure dolore incididunt sit.",
+          "spans": []
+        }
+      ],
+      "hours": [
+        {
+          "type": "paragraph",
+          "text": "Fugiat consequat ad in ad culpa qui sint ipsum.",
+          "spans": []
+        }
+      ]
+    }
+  }
+]

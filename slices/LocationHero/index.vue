@@ -10,7 +10,7 @@
         <PrismicRichText :field="slice.primary.title" />
       </div>
     </div>
-    <div class="location-hero-background" >
+    <div class="location-hero-background" ref="background" >
       <PrismicImage ref="image" :field="slice.primary.hero" />
     </div>
   </section>
