@@ -141,10 +141,10 @@ export default {
   }
 
   .informations {
-    font-size: 60px;
+    font-size: 40px;
     font-family: 'Sharp Grotesk';
     text-transform: uppercase;
-    width: 50%;
+    width: 60%;
     color: black;
 
     @include wide-mobile() {

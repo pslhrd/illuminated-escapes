@@ -3,6 +3,15 @@
     <div class="left">
       <PrismicImage :field="slice.primary.image" />
     </div>
+    <div class="right">
+      <PrismicRichText class="subtitle" :field="slice.primary.subtitle" />
+      <PrismicRichText class="informations" :field="slice.primary.informations" />
+      <div class="cta" v-for="(item, i) in slice.items" :key="`slice-item-${i}`"> 
+        <PrismicLink :field="item.link" target="_blank">
+          <PrismicRichText :field="item.button" />
+        </PrismicLink>   
+      </div>
+    </div>
   </section>
 </template>
 
@@ -21,9 +30,9 @@ export default {
   @media (max-width: 800px) { @content; }
 }
   .location-specifications {
-    width: 50%;
+    width: 100vw;
     height: 100vh;
-    display: inline-block;
+    display: flex;
 
     @include wide-mobile() {
       flex-direction: column-reverse;
@@ -31,12 +40,12 @@ export default {
     }
 
     .left, .right {
-      width: 100%;
+      width: 50%;
       height: 100%;
 
       @include wide-mobile() {
         width: 100%;
-        height: 100%;
+        height: 50%;
       }
     }
 
