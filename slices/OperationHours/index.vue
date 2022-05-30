@@ -40,6 +40,7 @@ export default {
     width: 50%;
     font-size: 5vw;
     @include wide-mobile() {
+      width: 100%;
       font-size: 45px;
     }
   }
