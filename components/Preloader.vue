@@ -1,7 +1,7 @@
 <template>
 <div class="preloader" ref="preloader">
   <div class="video-wrapper" ref="wrapper">
-    <video ref="videoDom" src="/videos/kayak.mp4" autoplay muted loop playsinline></video>
+    <video ref="videoDom" src="/videos/preloader.mp4" autoplay muted loop playsinline></video>
   </div>
 </div>
 </template>

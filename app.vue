@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <!-- <Preloader /> -->
+    <Preloader />
     <Menu :data="menuData"/>
     <NuxtPage />
   </div>

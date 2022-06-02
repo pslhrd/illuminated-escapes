@@ -60,7 +60,7 @@ onMounted(() => {
 </script>
 
 
-<style lang="scss" scoped>
+<style lang="scss">
 @mixin wide-mobile {
   @media (max-width: 800px) { @content; }
 }
@@ -215,8 +215,16 @@ onMounted(() => {
         .content {
           width: 60%;
           font-size: 14px;
-          opacity: 0.6;
           margin-top: 15px;
+          ul {
+            li {
+              opacity: 0.6;
+              &:nth-child(1) {
+                color: #A6C4FF !important;
+                opacity: 1;
+              }
+            }
+          }
         }
       }
     }
